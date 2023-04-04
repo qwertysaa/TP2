@@ -155,7 +155,7 @@ public class Server {
                 }
             }
 
-            //Renvoyer la liste des cours pour une session au client avec objectOutputStream ***à réviser
+            //Renvoyer la liste des cours pour une session au client avec objectOutputStream ***à réviser ***comment faire pour que les cours des sessions précédentes ne s'accumulent pas dans le fichier envoyé au client
             FileOutputStream fileOs = new FileOutputStream("listeCoursSessionSpecifiee.txt");
             ObjectOutputStream os = new ObjectOutputStream(fileOs);
 
