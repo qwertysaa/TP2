@@ -173,7 +173,25 @@ public class Server {
      La méthode gére les exceptions si une erreur se produit lors de la lecture de l'objet, l'écriture dans un fichier ou dans le flux de sortie.
      */
     public void handleRegistration() {
-        // TODO: implémenter cette méthode
+        try {
+            //Disons que le contenu du fichier RegistrationForm a été converti en ce tableau:
+            String[] inscription = {"Hiver", "IFT2015", "12345678", "Leblanc", "Mathieu", "mathieu@umontreal.ca"};
+            FileWriter fw = new FileWriter("src/main/java/server/data/inscription.txt", true);
+            BufferedWriter writer = new BufferedWriter(fw);
+
+            String line = "\n";
+            for (int i = 0; i < inscription.length; i++) {
+                line += inscription[i];
+                if (i < (inscription.length - 1)) {
+                    line += "\t";
+                }
+            }
+            System.out.println(line); //pour déboguage
+            writer.append(line);
+            writer.close();
+            } catch (IOException e) {
+
+        }
     }
 }
 
