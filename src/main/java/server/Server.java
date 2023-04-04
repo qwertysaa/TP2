@@ -2,9 +2,7 @@ package server;
 
 import javafx.util.Pair;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -135,7 +133,38 @@ public class Server {
      @param arg la session pour laquelle on veut récupérer la liste des cours
      */
     public void handleLoadCourses(String arg) {
-        // TODO: implémenter cette méthode
+        try{
+            FileReader fr = new FileReader("src/main/java/server/data/cours.txt");
+            BufferedReader reader = new BufferedReader(fr);
+
+            //Créer liste d'objets "course" à partir du fichier cours.txt en ajoutant des lists de String contenant les données du cours
+            ArrayList<Object> course = new ArrayList<>();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("\t");
+                course.add(parts);
+            }
+
+            //Créer liste d'objets des cours à envoyer
+            ArrayList<Object> coursSessionSpecifiee = new ArrayList<>();
+            for (Object o : course) {
+                String[] cours = (String[]) o;
+                if (cours[2].equals(arg)){
+                    coursSessionSpecifiee.add(o);
+                    System.out.println(Arrays.asList((String[])o)); //pour débogage
+                }
+            }
+
+            //Renvoyer la liste des cours pour une session au client avec objectOutputStream ***à réviser
+            FileOutputStream fileOs = new FileOutputStream("listeCoursSessionSpecifiee.txt");
+            ObjectOutputStream os = new ObjectOutputStream(fileOs);
+
+            os.writeObject(coursSessionSpecifiee); //ajouter objet dans fichier "sérialisé" pour le client
+            System.out.println(Arrays.asList(coursSessionSpecifiee)); //pour débogage
+
+        } catch (IOException ex){
+            System.out.println("Erreur à l'ouverture du fichier");
+        }
     }
 
     /**
