@@ -1,6 +1,7 @@
 package server;
 
 import javafx.util.Pair;
+import server.models.*;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -137,30 +138,32 @@ public class Server {
             FileReader fr = new FileReader("src/main/java/server/data/cours.txt");
             BufferedReader reader = new BufferedReader(fr);
 
-            //Créer liste d'objets "course" à partir du fichier cours.txt en ajoutant des lists de String contenant les données du cours
-            ArrayList<Object> course = new ArrayList<>();
+            //Créer liste d'objets Course à partir du fichier cours.txt
+            ArrayList<Course> courses = new ArrayList<>();
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\t");
-                course.add(parts);
+                //Créer nouvel objet Course
+                Course cours = new Course(parts[1], parts[0], parts[2]);
+                courses.add(cours);
             }
 
-            //Créer liste d'objets des cours à envoyer
-            ArrayList<Object> coursSessionSpecifiee = new ArrayList<>();
-            for (Object o : course) {
-                String[] cours = (String[]) o;
-                if (cours[2].equals(arg)){
+            //Créer la liste des cours pour la session spécifiée
+            ArrayList<Course> coursSessionSpecifiee = new ArrayList<>();
+            for (Course o : courses) {
+                if ((o.getSession()).equals(arg)){
                     coursSessionSpecifiee.add(o);
-                    System.out.println(Arrays.asList((String[])o)); //pour débogage
+                    System.out.println(o.toString()); //pour débogage
                 }
             }
 
-            //Renvoyer la liste des cours pour une session au client avec objectOutputStream ***à réviser ***comment faire pour que les cours des sessions précédentes ne s'accumulent pas dans le fichier envoyé au client
+            //Renvoyer la liste des cours pour une session au client avec objectOutputStream ***à réviser
             FileOutputStream fileOs = new FileOutputStream("listeCoursSessionSpecifiee.txt");
             ObjectOutputStream os = new ObjectOutputStream(fileOs);
 
-            os.writeObject(coursSessionSpecifiee); //ajouter objet dans fichier "sérialisé" pour le client
+            os.writeObject(coursSessionSpecifiee); //ajouter objet dans fichier à envoyer au client
             System.out.println(Arrays.asList(coursSessionSpecifiee)); //pour débogage
+            os.close();
 
         } catch (IOException ex){
             System.out.println("Erreur à l'ouverture du fichier");
@@ -174,20 +177,17 @@ public class Server {
      */
     public void handleRegistration() {
         try {
-            //Disons que le contenu du fichier RegistrationForm a été converti en ce tableau:
-            String[] inscription = {"Hiver", "IFT2015", "12345678", "Leblanc", "Mathieu", "mathieu@umontreal.ca"};
+            //Disons que l'objet déconstruit est celui-là:
+            RegistrationForm form = new RegistrationForm("Mathieu", "Leblanc", "mathieu@umontreal.ca", "12345678", new Course("Programmation2","IFT1025","Hiver"));
+
+            //Enregistrer dans inscription.txt
             FileWriter fw = new FileWriter("src/main/java/server/data/inscription.txt", true);
             BufferedWriter writer = new BufferedWriter(fw);
 
-            String line = "\n";
-            for (int i = 0; i < inscription.length; i++) {
-                line += inscription[i];
-                if (i < (inscription.length - 1)) {
-                    line += "\t";
-                }
-            }
-            System.out.println(line); //pour déboguage
-            writer.append(line);
+            String ligneInscription = "\n" + form.getCourse().getSession() +"\t"+ form.getCourse().getCode() +"\t"+
+                    form.getMatricule() +"\t"+ form.getNom() +"\t"+ form.getPrenom() +"\t"+ form.getEmail();
+            System.out.println(ligneInscription); //pour déboguage
+            writer.append(ligneInscription);
             writer.close();
             } catch (IOException e) {
 
