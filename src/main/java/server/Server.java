@@ -140,32 +140,29 @@ public class Server {
 
             //Créer liste d'objets Course à partir du fichier cours.txt
             ArrayList<Course> courses = new ArrayList<>();
-            String line;
+            String line; //ligne dans le fichier
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\t");
-                //Créer nouvel objet Course
+                //Créer nouvel objet Course à ajouter
                 Course cours = new Course(parts[1], parts[0], parts[2]);
                 courses.add(cours);
             }
 
             //Créer la liste des cours pour la session spécifiée
             ArrayList<Course> coursSessionSpecifiee = new ArrayList<>();
-            for (Course o : courses) {
-                if ((o.getSession()).equals(arg)){
-                    coursSessionSpecifiee.add(o);
-                    System.out.println(o.toString()); //pour débogage
+            for (Course cours : courses) {
+                if ( (cours.getSession()).equals(arg) ) {
+                    coursSessionSpecifiee.add(cours);
+                    System.out.println(cours.toString()); //pour débogage
                 }
             }
 
-            //Renvoyer la liste des cours pour une session au client avec objectOutputStream ***à réviser
-            FileOutputStream fileOs = new FileOutputStream("listeCoursSessionSpecifiee.txt");
-            ObjectOutputStream os = new ObjectOutputStream(fileOs);
-
-            os.writeObject(coursSessionSpecifiee); //ajouter objet dans fichier à envoyer au client
+            //Renvoyer la liste des cours pour une session au client avec objectOutputStream
+            objectOutputStream.writeObject(coursSessionSpecifiee); //ajouter liste des cours correspondant à la session spécifiée dans fichier à envoyer au client
             System.out.println(Arrays.asList(coursSessionSpecifiee)); //pour débogage
-            os.close();
+            objectOutputStream.close(); //TODO à enlever, car déjà présent dans disconnect()
 
-        } catch (IOException ex){
+        } catch (IOException ex){                // TODO gérer l'exception
             System.out.println("Erreur à l'ouverture du fichier");
         }
     }
@@ -178,7 +175,8 @@ public class Server {
     public void handleRegistration() {
         try {
             //Disons que l'objet déconstruit est celui-là:
-            RegistrationForm form = new RegistrationForm("Mathieu", "Leblanc", "mathieu@umontreal.ca", "12345678", new Course("Programmation2","IFT1025","Hiver"));
+            // RegistrationForm form = (RegistrationForm) objectInputStream.readObject();
+            RegistrationForm form = new RegistrationForm("Mathieu", "Leblanc", "mathieu@umontreal.ca", "12345678", new Course("Programmation2","IFT1025","Hiver")); //déboguage
 
             //Enregistrer dans inscription.txt
             FileWriter fw = new FileWriter("src/main/java/server/data/inscription.txt", true);
@@ -189,7 +187,14 @@ public class Server {
             System.out.println(ligneInscription); //pour déboguage
             writer.append(ligneInscription);
             writer.close();
-            } catch (IOException e) {
+
+
+            //TODO comment renvoyer message de confirmation au client si l'inscription est réussie?
+            String inscriptionMessage = "Inscription réussie!";
+            objectOutputStream.writeObject(inscriptionMessage);
+            System.out.println("Inscription réussie!"); // déboguage
+
+            } catch (IOException e) { //TODO gérer l'exception
 
         }
     }

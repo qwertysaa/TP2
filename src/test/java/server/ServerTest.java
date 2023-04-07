@@ -2,6 +2,8 @@ package server;
 
 import junit.framework.TestCase;
 import org.junit.Test;
+import server.models.Course;
+import server.models.RegistrationForm;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -43,6 +45,7 @@ public class ServerTest extends TestCase {
     @Test
     public void testHandleRegistration() {
         try {
+            //TODO put a file for objectInputStream
             Server testserver = new Server(1337);
             testserver.handleRegistration();
         } catch (IOException e) {
@@ -61,4 +64,5 @@ public class ServerTest extends TestCase {
             throw new RuntimeException(e);
         }
     }
+
 }

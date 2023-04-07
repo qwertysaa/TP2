@@ -1,7 +1,7 @@
 package server;
 
 /**
- * Définit que tous les eventHandlers auront la même méthode.
+ * Définit la seule méthode qu'auront tous les eventHandlers.
  */
 @FunctionalInterface
 public interface EventHandler {
