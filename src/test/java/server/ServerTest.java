@@ -6,8 +6,10 @@ import server.models.Course;
 import server.models.RegistrationForm;
 
 import java.io.*;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class ServerTest extends TestCase {
     @Test
@@ -65,4 +67,21 @@ public class ServerTest extends TestCase {
         }
     }
 
+    @Test
+    public void testtClient() {
+        try {
+            Server testserver = new Server(1337);
+            Socket testClient = new Socket("127.0.0.1", 1337);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(testClient.getOutputStream());
+            Scanner scanner = new Scanner(System.in);
+            String line = scanner.nextLine();
+            System.out.println((String)  )
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

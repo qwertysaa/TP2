@@ -62,6 +62,7 @@ public class Server {
                 client = server.accept();
                 System.out.println("Connecté au client: " + client);
                 objectInputStream = new ObjectInputStream(client.getInputStream());
+                //System.out.println(objectInputStream.readObject().toString());// déboguage TODO ********
                 objectOutputStream = new ObjectOutputStream(client.getOutputStream());
                 listen();
                 disconnect();
@@ -153,14 +154,15 @@ public class Server {
             for (Course cours : courses) {
                 if ( (cours.getSession()).equals(arg) ) {
                     coursSessionSpecifiee.add(cours);
-                    System.out.println(cours.toString()); //pour débogage
+                    System.out.println(cours.toString() + "heehaa"); //pour débogage
                 }
             }
 
             //Renvoyer la liste des cours pour une session au client avec objectOutputStream
-            objectOutputStream.writeObject(coursSessionSpecifiee); //ajouter liste des cours correspondant à la session spécifiée dans fichier à envoyer au client
-            System.out.println(Arrays.asList(coursSessionSpecifiee)); //pour débogage
-            objectOutputStream.close(); //TODO à enlever, car déjà présent dans disconnect()
+            this.objectOutputStream.writeObject(coursSessionSpecifiee); //ajouter liste des cours correspondant à la session spécifiée dans fichier à envoyer au client
+            objectOutputStream.flush();
+            System.out.println(Arrays.asList(coursSessionSpecifiee) + "heehoo"); //pour débogage
+            //this.objectOutputStream.close(); //TODO à enlever, car déjà présent dans disconnect()
 
         } catch (IOException ex){                // TODO gérer l'exception
             System.out.println("Erreur à l'ouverture du fichier");
@@ -175,7 +177,7 @@ public class Server {
     public void handleRegistration() {
         try {
             //Disons que l'objet déconstruit est celui-là:
-            // RegistrationForm form = (RegistrationForm) objectInputStream.readObject();
+            // RegistrationForm form = (RegistrationForm) this.objectInputStream.readObject();
             RegistrationForm form = new RegistrationForm("Mathieu", "Leblanc", "mathieu@umontreal.ca", "12345678", new Course("Programmation2","IFT1025","Hiver")); //déboguage
 
             //Enregistrer dans inscription.txt
@@ -191,7 +193,7 @@ public class Server {
 
             //TODO comment renvoyer message de confirmation au client si l'inscription est réussie?
             String inscriptionMessage = "Inscription réussie!";
-            objectOutputStream.writeObject(inscriptionMessage);
+            this.objectOutputStream.writeObject(inscriptionMessage);
             System.out.println("Inscription réussie!"); // déboguage
 
             } catch (IOException e) { //TODO gérer l'exception
