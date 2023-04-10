@@ -1,4 +1,5 @@
 package server;
+import server.models.Course;
 
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -75,13 +76,30 @@ public class ServerTest extends TestCase {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(testClient.getOutputStream());
             Scanner scanner = new Scanner(System.in);
             String line = scanner.nextLine();
-            System.out.println((String)  )
+            System.out.println((String)  line);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
 
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
     }
+@Test
+    public void testTransferCourses(){
+    try {
+        FileInputStream fileOs = new FileInputStream("transferCourses.txt");
+        ObjectInputStream os = new ObjectInputStream(fileOs);
+
+        ArrayList<Course> listecours = (ArrayList<Course>) os.readObject(); //ajouter objet dans fichier "sérialisé" pour le client
+        System.out.println(Arrays.asList(listecours)); //pour débogage
+        for (Object o : listecours) {
+            System.out.println(o.toString()); //pour débogage
+        }
+    } catch (FileNotFoundException i) {
+
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    } catch (ClassNotFoundException e) {
+        throw new RuntimeException(e);
+    }
+}
 }

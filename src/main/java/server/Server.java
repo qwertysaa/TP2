@@ -62,7 +62,6 @@ public class Server {
                 client = server.accept();
                 System.out.println("Connecté au client: " + client);
                 objectInputStream = new ObjectInputStream(client.getInputStream());
-                //System.out.println(objectInputStream.readObject().toString());// déboguage TODO ********
                 objectOutputStream = new ObjectOutputStream(client.getOutputStream());
                 listen();
                 disconnect();
@@ -159,10 +158,14 @@ public class Server {
             }
 
             //Renvoyer la liste des cours pour une session au client avec objectOutputStream
-            this.objectOutputStream.writeObject(coursSessionSpecifiee); //ajouter liste des cours correspondant à la session spécifiée dans fichier à envoyer au client
-            objectOutputStream.flush();
+                    //Remplacer objectOutputStream, car ne marche pas pour moi
+            FileOutputStream fileOutputStream = new FileOutputStream("transferCourses.txt");
+            ObjectOutputStream objectOutputStream1 = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream1.writeObject(coursSessionSpecifiee);
+            objectOutputStream1.close();
+
+            //this.objectOutputStream.writeObject(coursSessionSpecifiee); //ajouter liste des cours correspondant à la session spécifiée dans fichier à envoyer au client
             System.out.println(Arrays.asList(coursSessionSpecifiee) + "heehoo"); //pour débogage
-            //this.objectOutputStream.close(); //TODO à enlever, car déjà présent dans disconnect()
 
         } catch (IOException ex){                // TODO gérer l'exception
             System.out.println("Erreur à l'ouverture du fichier");
@@ -176,14 +179,23 @@ public class Server {
      */
     public void handleRegistration() {
         try {
-            //Disons que l'objet déconstruit est celui-là:
-            // RegistrationForm form = (RegistrationForm) this.objectInputStream.readObject();
-            RegistrationForm form = new RegistrationForm("Mathieu", "Leblanc", "mathieu@umontreal.ca", "12345678", new Course("Programmation2","IFT1025","Hiver")); //déboguage
+            //Prendre le RegistrationForm envoyé par le client
+            //Remplacer objectOutputStream, car ne marche pas pour moi
+            FileInputStream fileIs = new FileInputStream("formInfoInscription.txt");
+            ObjectInputStream is = new ObjectInputStream(fileIs);
+            RegistrationForm form = (RegistrationForm) is.readObject();
+            is.close();
 
+
+            /*//Disons que l'objet déconstruit est celui-là:
+            RegistrationForm form = new RegistrationForm("Mathieu", "Leblanc", "mathieu@umontreal.ca", "12345678", new Course("Programmation2","IFT1025","Hiver")); //déboguage
+*/
             //Enregistrer dans inscription.txt
             FileWriter fw = new FileWriter("src/main/java/server/data/inscription.txt", true);
             BufferedWriter writer = new BufferedWriter(fw);
 
+            System.out.println(form.toString());
+            System.out.println(form.getCourse().toString());
             String ligneInscription = "\n" + form.getCourse().getSession() +"\t"+ form.getCourse().getCode() +"\t"+
                     form.getMatricule() +"\t"+ form.getNom() +"\t"+ form.getPrenom() +"\t"+ form.getEmail();
             System.out.println(ligneInscription); //pour déboguage
@@ -198,6 +210,8 @@ public class Server {
 
             } catch (IOException e) { //TODO gérer l'exception
 
+            } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }
