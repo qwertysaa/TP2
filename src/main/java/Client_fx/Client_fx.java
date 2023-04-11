@@ -2,10 +2,13 @@ package Client_fx;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import server.models.Course;
 
 public class Client_fx extends Application {
     public static void main(String[] args){
@@ -16,8 +19,7 @@ public class Client_fx extends Application {
         Modele leModele = new Modele();
         Vue laVue = new Vue();
         Controleur leControleur = new Controleur(leModele, laVue);
-
-        Scene scene = new Scene(laVue, 320, 250);
+        Scene scene = new Scene(laVue, 600, 600);
 
         stage.setTitle("Inscription UdeM");
         stage.setScene(scene);
