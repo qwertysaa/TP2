@@ -1,0 +1,26 @@
+package Client_fx;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+public class Client_fx extends Application {
+    public static void main(String[] args){
+        launch(args);
+    }
+    @Override
+    public void start(Stage stage) throws Exception {
+        Modele leModele = new Modele();
+        Vue laVue = new Vue();
+        Controleur leControleur = new Controleur(leModele, laVue);
+
+        Scene scene = new Scene(laVue, 320, 250);
+
+        stage.setTitle("Inscription UdeM");
+        stage.setScene(scene);
+        stage.show();
+    }
+}
