@@ -135,10 +135,9 @@ public class Server {
      */
     public void handleLoadCourses(String arg) {
         try{
+            //Créer liste d'objets Course à partir du fichier cours.txt
             FileReader fr = new FileReader("src/main/java/server/data/cours.txt");
             BufferedReader reader = new BufferedReader(fr);
-
-            //Créer liste d'objets Course à partir du fichier cours.txt
             ArrayList<Course> courses = new ArrayList<>();
             String line; //ligne dans le fichier
             while ((line = reader.readLine()) != null) {
@@ -158,13 +157,7 @@ public class Server {
             }
 
             //Renvoyer la liste des cours pour une session au client avec objectOutputStream
-                    //Remplacer objectOutputStream, car ne marche pas pour moi
-            FileOutputStream fileOutputStream = new FileOutputStream("transferCourses.txt");
-            ObjectOutputStream objectOutputStream1 = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream1.writeObject(coursSessionSpecifiee);
-            objectOutputStream1.close();
-
-            //this.objectOutputStream.writeObject(coursSessionSpecifiee); //ajouter liste des cours correspondant à la session spécifiée dans fichier à envoyer au client
+            this.objectOutputStream.writeObject(coursSessionSpecifiee); //ajouter liste des cours correspondant à la session spécifiée dans fichier à envoyer au client
             System.out.println(Arrays.asList(coursSessionSpecifiee) + "heehoo"); //pour débogage
 
         } catch (IOException ex){                // TODO gérer l'exception
@@ -175,33 +168,24 @@ public class Server {
     /**
      Récupérer l'objet 'RegistrationForm' envoyé par le client en utilisant 'objectInputStream', l'enregistrer dans un fichier texte
      et renvoyer un message de confirmation au client.
-     La méthode gére les exceptions si une erreur se produit lors de la lecture de l'objet, l'écriture dans un fichier ou dans le flux de sortie.
+     La méthode gère les exceptions si une erreur se produit lors de la lecture de l'objet, l'écriture dans un fichier ou dans le flux de sortie.
      */
     public void handleRegistration() {
         try {
-            //Prendre le RegistrationForm envoyé par le client
-            //Remplacer objectOutputStream, car ne marche pas pour moi
-            FileInputStream fileIs = new FileInputStream("formInfoInscription.txt");
-            ObjectInputStream is = new ObjectInputStream(fileIs);
-            RegistrationForm form = (RegistrationForm) is.readObject();
-            is.close();
+            //Récupérer le RegistrationForm envoyé par le client
+            RegistrationForm form = (RegistrationForm) objectInputStream.readObject();
 
-
-            /*//Disons que l'objet déconstruit est celui-là:
-            RegistrationForm form = new RegistrationForm("Mathieu", "Leblanc", "mathieu@umontreal.ca", "12345678", new Course("Programmation2","IFT1025","Hiver")); //déboguage
-*/
-            //Enregistrer dans inscription.txt
+            //Enregistrer l'inscription dans inscription.txt
             FileWriter fw = new FileWriter("src/main/java/server/data/inscription.txt", true);
             BufferedWriter writer = new BufferedWriter(fw);
 
-            System.out.println(form.toString());
-            System.out.println(form.getCourse().toString());
+            System.out.println(form.toString()); //débogage
+            System.out.println(form.getCourse().toString()); //débogage
             String ligneInscription = "\n" + form.getCourse().getSession() +"\t"+ form.getCourse().getCode() +"\t"+
                     form.getMatricule() +"\t"+ form.getNom() +"\t"+ form.getPrenom() +"\t"+ form.getEmail();
             System.out.println(ligneInscription); //pour déboguage
             writer.append(ligneInscription);
             writer.close();
-
 
             //TODO comment renvoyer message de confirmation au client si l'inscription est réussie?
             String inscriptionMessage = "Inscription réussie!";
