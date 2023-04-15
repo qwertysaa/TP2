@@ -130,7 +130,8 @@ public class Server {
      Lire un fichier texte contenant des informations sur les cours et les transformer en liste d'objets 'Course'.
      La méthode filtre les cours par la session spécifiée en argument.
      Ensuite, elle renvoie la liste des cours pour une session au client en utilisant l'objet 'objectOutputStream'.
-     La méthode gère les exceptions si une erreur se produit lors de la lecture du fichier ou de l'écriture de l'objet dans le flux.
+     La méthode gère les exceptions si une erreur se produit lors de la lecture du fichier ou de l'écriture de l'objet
+     dans le flux.
      @param arg la session pour laquelle on veut récupérer la liste des cours
      */
     public void handleLoadCourses(String arg) {
@@ -157,7 +158,8 @@ public class Server {
             }
 
             //Renvoyer la liste des cours pour une session au client avec objectOutputStream
-            this.objectOutputStream.writeObject(coursSessionSpecifiee); //ajouter liste des cours correspondant à la session spécifiée dans fichier à envoyer au client
+            this.objectOutputStream.writeObject(coursSessionSpecifiee); //ajouter liste des cours correspondant à la
+            // session spécifiée dans fichier à envoyer au client
             System.out.println(Arrays.asList(coursSessionSpecifiee) + "heehoo"); //pour débogage
 
         } catch (IOException ex){                // TODO gérer l'exception
@@ -166,9 +168,11 @@ public class Server {
     }
 
     /**
-     Récupérer l'objet 'RegistrationForm' envoyé par le client en utilisant 'objectInputStream', l'enregistrer dans un fichier texte
+     Récupérer l'objet 'RegistrationForm' envoyé par le client en utilisant 'objectInputStream', l'enregistrer dans un
+     fichier texte
      et renvoyer un message de confirmation au client.
-     La méthode gère les exceptions si une erreur se produit lors de la lecture de l'objet, l'écriture dans un fichier ou dans le flux de sortie.
+     La méthode gère les exceptions si une erreur se produit lors de la lecture de l'objet, l'écriture dans un fichier
+     ou dans le flux de sortie.
      */
     public void handleRegistration() {
         try {
