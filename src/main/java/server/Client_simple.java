@@ -15,7 +15,8 @@ public class Client_simple {
         try {
             Socket clientSocket = new Socket("localhost", 1337);
 
-            System.out.print("Veuillez entrer 1 pour consulter la liste des cours pour une session ou entrer 2 pour vous inscrire à un cours. \n");
+            System.out.print("Veuillez entrer 1 pour consulter la liste des cours pour une session ou entrer 2 pour " +
+                    "vous inscrire à un cours. \n");
 
             Scanner scanner1 = new Scanner(System.in);
             Integer choice = scanner1.nextInt();
@@ -82,7 +83,8 @@ public class Client_simple {
 
     public static void inscrireCours(Socket clientSocket) throws IOException, ClassNotFoundException {
         //Envoi de la commande
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream()); //*** À modifier, car répétition dans le code
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
+        //*** À modifier, car répétition dans le code
         String ligne = "INSCRIRE";
         objectOutputStream.writeObject(ligne);
         System.out.println("Envoi de la requête: " + ligne);
