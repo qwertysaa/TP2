@@ -1,5 +1,6 @@
 package Client_fx;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,8 +23,10 @@ public class Vue extends BorderPane {
     Vue() {
 
         VBox leftVBox = new VBox();
-        Text textCours = new Text("Liste des cours");
+        Text textCours = new Text("                              Liste des cours");
         leftVBox.getChildren().add(textCours);
+        leftVBox.setMinWidth(300);
+        leftVBox.setPadding(new Insets(10));
 
         TableView<Course> coursSession = new TableView<>();
         leftVBox.getChildren().add(coursSession);
@@ -40,39 +43,53 @@ public class Vue extends BorderPane {
         this.setLeft(leftVBox);
 
         VBox rightVBox = new VBox();
-        Text textInscription = new Text("Formulaire d'inscription");
-        rightVBox.getChildren().add(textInscription);
+        HBox inscription = new HBox();
+        Text textInscription = new Text("                         Formulaire d'inscription");
+        inscription.getChildren().add(textInscription);
+        rightVBox.getChildren().add(inscription);
+        inscription.setPadding(new Insets(5));
 
         HBox prenom = new HBox();
-        Text textPrenom = new Text("Prénom");
+        Text textPrenom = new Text("Prénom    ");
         prenom.getChildren().add(textPrenom);
         TextField enterPrenom = new TextField();
         prenom.getChildren().add(enterPrenom);
         rightVBox.getChildren().add(prenom);
+        enterPrenom.setMinWidth(200);
+        prenom.setPadding(new Insets(10));
+
 
         HBox nom = new HBox();
-        Text textNom = new Text("Nom");
+        Text textNom = new Text("Nom         ");
         nom.getChildren().add(textNom);
         TextField enterNom = new TextField();
         nom.getChildren().add(enterNom);
         rightVBox.getChildren().add(nom);
+        nom.setPadding(new Insets(10));
+        enterNom.setMinWidth(200);
 
         HBox email = new HBox();
-        Text textEmail = new Text("Email");
+        Text textEmail = new Text("Email        ");
         email.getChildren().add(textEmail);
         TextField enterEmail = new TextField();
         email.getChildren().add(enterEmail);
         rightVBox.getChildren().add(email);
+        email.setPadding(new Insets(10));
+        enterEmail.setMinWidth(200);
 
         HBox matricule = new HBox();
-        Text textMatricule = new Text("Matricule");
+        Text textMatricule = new Text("Matricule  ");
         matricule.getChildren().add(textMatricule);
         TextField enterMatricule = new TextField();
         matricule.getChildren().add(enterMatricule);
         rightVBox.getChildren().add(matricule);
+        matricule.setPadding(new Insets(10));
+        enterMatricule.setMinWidth(200);
 
         Button envoyer = new Button("envoyer");
         rightVBox.getChildren().add(envoyer);
-        this.setRight(rightVBox);
+        envoyer.setPadding(new Insets(10));
+        
+        this.setCenter(rightVBox);
     }
 }
