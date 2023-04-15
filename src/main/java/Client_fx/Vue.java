@@ -74,5 +74,5 @@ public class Vue extends BorderPane {
         Button envoyer = new Button("envoyer");
         rightVBox.getChildren().add(envoyer);
         this.setRight(rightVBox);
-    }test.
+    }
 }
