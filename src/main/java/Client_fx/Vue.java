@@ -1,5 +1,6 @@
 package Client_fx;
 
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -38,6 +39,7 @@ public class Vue extends BorderPane {
         bottomLeftHBox.getChildren().add(session);
         Button charger = new Button("charger");
         bottomLeftHBox.getChildren().add(charger);
+        bottomLeftHBox.setSpacing(150);
         leftVBox.getChildren().add(bottomLeftHBox);
 
         this.setLeft(leftVBox);
