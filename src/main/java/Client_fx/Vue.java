@@ -25,12 +25,11 @@ public class Vue extends BorderPane {
     Vue() {
 
         VBox leftVBox = new VBox();
-        Text textCours = new Text("                              Liste des cours");
+        Text textCours = new Text("                          Liste des cours");
         HBox coursHBox = new HBox();
         coursHBox.getChildren().add(textCours);
-        leftVBox.getChildren().add(textCours);
-        coursHBox.setPadding(new Insets(10));
-        Text ligneVide = new Text("");
+        leftVBox.getChildren().add(coursHBox);
+        coursHBox.setPadding(new Insets(7));
 
         leftVBox.setPadding(new Insets(10));
 
@@ -46,7 +45,7 @@ public class Vue extends BorderPane {
         bottomLeftHBox.getChildren().add(session);
         Button charger = new Button("charger");
         bottomLeftHBox.getChildren().add(charger);
-        bottomLeftHBox.setSpacing(150);
+        bottomLeftHBox.setSpacing(100);
         leftVBox.getChildren().add(bottomLeftHBox);
 
         this.setLeft(leftVBox);
