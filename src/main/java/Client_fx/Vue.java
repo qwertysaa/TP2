@@ -1,16 +1,14 @@
 package Client_fx;
 
-import javafx.geometry.HPos;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.geometry.HPos;
 import server.models.Course;
 
 /*
@@ -40,8 +38,14 @@ public class Vue extends BorderPane {
 
         leftVBox.setPadding(new Insets(10));
 
-
         leftVBox.getChildren().add(coursSession);
+        coursSession.setEditable(true);
+        TableColumn<Course, String> codeColumn = new TableColumn<>("Code");
+        codeColumn.setCellValueFactory(new PropertyValueFactory<>("code"));
+        TableColumn<Course, String> coursColumn = new TableColumn<>("Cours");
+        coursColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        coursSession.getColumns().setAll(codeColumn,coursColumn);
+        coursSession.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         HBox tableHBox = new HBox();
         tableHBox.getChildren().add(coursSession);
@@ -107,6 +111,9 @@ public class Vue extends BorderPane {
     }
     public TableView<Course> getCoursSession() {
         return this.coursSession;
+    }
+    public ChoiceBox<String> getSession() {
+        return session;
     }
     public Button getChargerButton() {
         return this.charger;
