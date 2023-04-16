@@ -10,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.geometry.HPos;
 import server.models.Course;
 
 /*
@@ -31,12 +32,21 @@ public class Vue extends BorderPane {
     Vue() {
 
         VBox leftVBox = new VBox();
-        Text textCours = new Text("                              Liste des cours");
-        leftVBox.getChildren().add(textCours);
-        leftVBox.setMinWidth(300);
+        Text textCours = new Text("                          Liste des cours");
+        HBox coursHBox = new HBox();
+        coursHBox.getChildren().add(textCours);
+        leftVBox.getChildren().add(coursHBox);
+        coursHBox.setPadding(new Insets(7));
+
         leftVBox.setPadding(new Insets(10));
 
+
         leftVBox.getChildren().add(coursSession);
+
+        HBox tableHBox = new HBox();
+        TableView<Course> coursSession = new TableView<>();
+        tableHBox.getChildren().add(coursSession);
+        leftVBox.getChildren().add(tableHBox);
 
         HBox bottomLeftHBox = new HBox();
         Separator sep = new Separator();
@@ -46,7 +56,7 @@ public class Vue extends BorderPane {
         session.getItems().addAll(sessions);
         bottomLeftHBox.getChildren().add(session);
         bottomLeftHBox.getChildren().add(charger);
-        bottomLeftHBox.setSpacing(150);
+        bottomLeftHBox.setSpacing(100);
         leftVBox.getChildren().add(bottomLeftHBox);
 
         this.setLeft(leftVBox);
