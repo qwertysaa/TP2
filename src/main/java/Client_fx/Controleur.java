@@ -18,6 +18,13 @@ public class Controleur {
             this.vue.getCoursSession().setItems((getCoursDisponibles(sessionSelectionnee)));
         });
         this.vue.getEnvoyerButton().setOnAction((event) ->{
+            String prenom = this.vue.getEnterPrenom().getText();
+            String nom = this.vue.getEnterNom().getText();
+            String email = this.vue.getEnterEmail().getText();
+            String matricule = this.vue.getEnterMatricule().getText();
+            Course coursSelectionne = this.vue.getCoursSession().getSelectionModel().getSelectedItem();
+            System.out.println(prenom + " " + nom + " " + email + " " + matricule + " " + coursSelectionne.toString());
+            System.out.println(this.modele.inscrireCours(prenom, nom, email, matricule, coursSelectionne));
 
         });
     }

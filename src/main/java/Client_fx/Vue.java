@@ -3,10 +3,12 @@ package Client_fx;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import server.models.Course;
@@ -30,6 +32,7 @@ public class Vue extends BorderPane {
     Vue() {
 
         VBox leftVBox = new VBox();
+        leftVBox.setSpacing(20); //Ajouter de l'espace
         Text textCours = new Text("                          Liste des cours");
         HBox coursHBox = new HBox();
         coursHBox.getChildren().add(textCours);
@@ -51,15 +54,19 @@ public class Vue extends BorderPane {
         tableHBox.getChildren().add(coursSession);
         leftVBox.getChildren().add(tableHBox);
 
-        HBox bottomLeftHBox = new HBox();
-        Separator sep = new Separator();
+      /*  Separator sep = new Separator();
         sep.setPrefHeight(25);
-        leftVBox.getChildren().add(sep);
+        leftVBox.getChildren().add(sep);*/
+
+        HBox bottomLeftHBox = new HBox();
         String[] sessions = {"Hiver", "Automne", "Ete"};
         session.getItems().addAll(sessions);
+        HBox chargerHBox = new HBox();
+        chargerHBox.getChildren().add(charger);
+        chargerHBox.setAlignment(Pos.BASELINE_RIGHT);
         bottomLeftHBox.getChildren().add(session);
-        bottomLeftHBox.getChildren().add(charger);
-        bottomLeftHBox.setSpacing(100);
+        bottomLeftHBox.getChildren().add(chargerHBox);
+        bottomLeftHBox.setHgrow(chargerHBox, Priority.ALWAYS);
         leftVBox.getChildren().add(bottomLeftHBox);
 
         this.setLeft(leftVBox);
