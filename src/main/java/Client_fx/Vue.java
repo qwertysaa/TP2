@@ -89,7 +89,7 @@ public class Vue extends BorderPane {
         Button envoyer = new Button("envoyer");
         rightVBox.getChildren().add(envoyer);
         envoyer.setPadding(new Insets(10));
-        
+
         this.setCenter(rightVBox);
     }
 }
