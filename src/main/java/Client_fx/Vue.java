@@ -44,7 +44,6 @@ public class Vue extends BorderPane {
         leftVBox.getChildren().add(coursSession);
 
         HBox tableHBox = new HBox();
-        TableView<Course> coursSession = new TableView<>();
         tableHBox.getChildren().add(coursSession);
         leftVBox.getChildren().add(tableHBox);
 
