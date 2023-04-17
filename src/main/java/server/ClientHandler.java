@@ -1,83 +1,50 @@
 package server;
 
 import javafx.util.Pair;
-import server.models.*;
+import server.models.Course;
+import server.models.RegistrationForm;
 
 import java.io.*;
-import java.net.ServerSocket;
+import java.lang.ref.Cleaner;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * Classe représentant le modèle d'un serveur qui gère les inscriptions
- */
-public class Server {
-
-    /**
-     * Commande de la ligne de commande correspondant à la commande pour l'inscription
-     */
-    public final static String REGISTER_COMMAND = "INSCRIRE";
-
-    /**
-     * Commande de la ligne de commande correspondant à la commande pour obtenir la liste de cours pour une session
-     */
-    public final static String LOAD_COMMAND = "CHARGER";
-    private final ServerSocket server;
+public class ClientHandler implements Runnable{
     private Socket client;
-    private ObjectInputStream objectInputStream;
-    private ObjectOutputStream objectOutputStream;
     private final ArrayList<EventHandler> handlers;
+    ObjectInputStream objectInputStream;
+    ObjectOutputStream objectOutputStream;
+    public final static String REGISTER_COMMAND = "INSCRIRE";
+    public final static String LOAD_COMMAND = "CHARGER";
 
-    /**
-    * Crée un serveur qui écoute sur le port spécifié et qui n'accepte qu'un client.
-    */
-    public Server(int port) throws IOException {
-        this.server = new ServerSocket(port, 1);
+    public ClientHandler(Socket socket){
+        this.client = socket;
         this.handlers = new ArrayList<EventHandler>();
         this.addEventHandler(this::handleEvents);
     }
-
-    /**
-     * Ajoute un handler au serveur (à la liste de handlers).
-     *
-     * @param h handler
-     */
     public void addEventHandler(EventHandler h) {
         this.handlers.add(h);
     }
-
     private void alertHandlers(String cmd, String arg) {
         for (EventHandler h : this.handlers) {
             h.handle(cmd, arg);
         }
     }
-
-    /**
-     * Établit la connexion avec le client
-     */
+    @Override
     public void run() {
-        while (true) {
-            try {
-                client = server.accept();
-                System.out.println("Connecté au client: " + client);
-                //Thread t = new Thread(() -> {
-                //    try {
-                        objectInputStream = new ObjectInputStream(client.getInputStream());
-                        objectOutputStream = new ObjectOutputStream(client.getOutputStream());
-                        listen();
-                        disconnect();
-                //    } catch (IOException | ClassNotFoundException e) {
-                //        throw new RuntimeException(e);
-                //    }
-                System.out.println("Client déconnecté!");//});
-                /*Runnable r = new ClientHandler(client);
-                Thread t = new Thread(r);
-                t.start();*/
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            System.out.println("Connecté au client: " + client);
+            this.objectInputStream = new ObjectInputStream(client.getInputStream());
+            this.objectOutputStream = new ObjectOutputStream(client.getOutputStream());
+            System.out.println("bip");
+            listen();
+            disconnect();
+            System.out.println("Client déconnecté!");
+        }catch (Exception e) {
+            throw new RuntimeException(e);
         }
+
     }
 
     /**
@@ -182,33 +149,39 @@ public class Server {
      La méthode gère les exceptions si une erreur se produit lors de la lecture de l'objet, l'écriture dans un fichier
      ou dans le flux de sortie.
      */
+    private final Object lockInscription = new Object();
     public void handleRegistration() {
-        try {
-            //Récupérer le RegistrationForm envoyé par le client
-            RegistrationForm form = (RegistrationForm) objectInputStream.readObject();
 
-            //Enregistrer l'inscription dans inscription.txt
-            FileWriter fw = new FileWriter("src/main/java/server/data/inscription.txt", true);
-            BufferedWriter writer = new BufferedWriter(fw);
+        synchronized (lockInscription) {
+            System.out.println("1st beep");
+            try {
+                System.out.println("2nd beep");
+                //Récupérer le RegistrationForm envoyé par le client
+                RegistrationForm form = (RegistrationForm) objectInputStream.readObject();
+                System.out.println("3rd beep");
 
-            System.out.println(form.toString()); //débogage
-            System.out.println(form.getCourse().toString()); //débogage
-            String ligneInscription = "\n" + form.getCourse().getSession() +"\t"+ form.getCourse().getCode() +"\t"+
-                    form.getMatricule() +"\t"+ form.getNom() +"\t"+ form.getPrenom() +"\t"+ form.getEmail();
-            System.out.println(ligneInscription); //pour déboguage
-            writer.append(ligneInscription);
-            writer.close();
+                //Enregistrer l'inscription dans inscription.txt
+                FileWriter fw = new FileWriter("src/main/java/server/data/inscription.txt", true);
+                BufferedWriter writer = new BufferedWriter(fw);
 
-            //TODO comment renvoyer message de confirmation au client si l'inscription est réussie?
-            String inscriptionMessage = "Inscription réussie!";
-            this.objectOutputStream.writeObject(inscriptionMessage);
-            System.out.println("Inscription réussie!"); // déboguage
+                System.out.println(form.toString()); //débogage
+                System.out.println(form.getCourse().toString()); //débogage
+                String ligneInscription = "\n" + form.getCourse().getSession() + "\t" + form.getCourse().getCode() + "\t" +
+                        form.getMatricule() + "\t" + form.getNom() + "\t" + form.getPrenom() + "\t" + form.getEmail();
+                System.out.println(ligneInscription); //pour déboguage
+                writer.append(ligneInscription);
+                writer.close();
+
+                //TODO comment renvoyer message de confirmation au client si l'inscription est réussie?
+                String inscriptionMessage = "Inscription réussie!";
+                this.objectOutputStream.writeObject(inscriptionMessage);
+                System.out.println("Inscription réussie!"); // déboguage
 
             } catch (IOException e) { //TODO gérer l'exception
-                System.out.println("Erreur!");
+
             } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+                throw new RuntimeException(e);
+            }
         }
     }
 }
-
