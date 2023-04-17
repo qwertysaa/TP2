@@ -3,6 +3,12 @@ package Client_fx;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import server.models.Course;
 
 public class Client_fx extends Application {
     public static void main(String[] args){
@@ -21,10 +27,10 @@ public class Client_fx extends Application {
 
         Modele laModele = new Modele();
         Erreur leErreur = new Erreur();
-        ControleurErreur laControleur = new ControleurErreur(leModele, leErreur);
-        Scene sceneErreur = new Scene(leErreur, 400, 200);
+        ControleurErreur laControleur = new ControleurErreur(laModele, leErreur);
         stage.setTitle("Erreur");
-        stage.setScene(sceneErreur);
+        stage.setScene(new Scene(leErreur, 400, 200));
         stage.show();
+
     }
 }

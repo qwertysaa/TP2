@@ -7,6 +7,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /*
  * Dans cette classe nous definissons les éléments graphiques de notre
@@ -14,8 +16,18 @@ import javafx.scene.text.Text;
  * Notez que cette classe est completement independante de toute definition
  * de comportement.
  */
-public class Erreur extends BorderPane {
-    Erreur() {
+public class Erreur {
+    public static void Erreur(String title, String message) {
+        Stage window = new Stage();
+
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle(title);
+        window.setMinWidth(250);
+
+        Label label = new Label();
+        label.setText(message);
+
+        VBox la
         VBox erreurVBox = new VBox();
         erreurVBox.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 
@@ -36,3 +48,4 @@ public class Erreur extends BorderPane {
         messageHBox.getChildren().add(textMessage);
         erreurVBox.getChildren().add(messageHBox);
     }}
+
