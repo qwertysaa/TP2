@@ -16,19 +16,25 @@ public class Modele {
 
     public ArrayList<Course> voirSession(String session) {
         try {
+
             clientSocket = new Socket("localhost", 1337);
+
         } catch (IOException e) {
+
             throw new RuntimeException(e);
+
         }
+
         try {
-            //Envoi de la commande appropriée
+
+            // Envoi de la commande appropriée
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
             String line = ("CHARGER " + session);
 
             objectOutputStream.writeObject(line);
             System.out.println("Envoi de la requête: " + line); //débogage
 
-            //Afficher les cours de la session spécifiée
+            // Afficher les cours de la session spécifiée
             ObjectInputStream objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
             ArrayList<Course> reponse = (ArrayList<Course>) objectInputStream.readObject();
 
@@ -43,7 +49,9 @@ public class Modele {
             objectOutputStream.close();
 
             return reponse;
+
         } catch (IOException | ClassNotFoundException e) {
+
         }
         return null; //???? faut l'ajouter car sinon erreur selon IDE
     }
@@ -55,14 +63,14 @@ public class Modele {
             throw new RuntimeException(e);
         }
         try {
-            //Envoi de la commande
+            // Envoi de la commande au serveur
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
-            //*** À modifier, car répétition dans le code
+            // *** À modifier, car répétition dans le code
             String ligne = "INSCRIRE";
             objectOutputStream.writeObject(ligne);
             System.out.println("Envoi de la requête: " + ligne);
 
-            //TODO probablement à modifier
+            // TODO probablement à modifier
             RegistrationForm formulaire = new RegistrationForm(prenom, nom, email, matricule, coursSelectionne);
             System.out.println("formulaire :"+ formulaire.toString());
             objectOutputStream.writeObject(formulaire);
