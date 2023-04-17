@@ -61,11 +61,19 @@ public class Server {
             try {
                 client = server.accept();
                 System.out.println("Connecté au client: " + client);
+                //Thread t = new Thread(() -> {
+                //    try {
                 objectInputStream = new ObjectInputStream(client.getInputStream());
                 objectOutputStream = new ObjectOutputStream(client.getOutputStream());
                 listen();
                 disconnect();
-                System.out.println("Client déconnecté!");
+                //    } catch (IOException | ClassNotFoundException e) {
+                //        throw new RuntimeException(e);
+                //    }
+                System.out.println("Client déconnecté!");//});
+                /*Runnable r = new ClientHandler(client);
+                Thread t = new Thread(r);
+                t.start();*/
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -197,6 +205,8 @@ public class Server {
             System.out.println("Inscription réussie!"); // déboguage
 
             } catch (IOException e) { //TODO gérer l'exception
+
+            System.out.println("Erreur!");
 
             } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
