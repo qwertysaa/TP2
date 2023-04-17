@@ -150,7 +150,7 @@ public class Vue extends BorderPane {
         HBox envoyerHBox = new HBox();
         envoyerHBox.getChildren().add(envoyer);
         rightVBox.getChildren().add(envoyerHBox);
-        
+
         envoyer.setPadding(new Insets(10));
         envoyerHBox.setPadding(new Insets(10));
 
