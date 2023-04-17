@@ -1,2 +1,5 @@
 Automne	IFT2255	12345678	Michalis    Famelis	mfamelis@iro.umontreal.ca
 Hiver	IFT2015	12345678	Leblanc Mathieu	mathieu@umontreal.ca
+Automne	IFT1015	daw	dadwa	dawa	daw
+Automne	IFT1015	324	fe	da	dwa
+Hiver	IFT1025	83	fes	da	fea

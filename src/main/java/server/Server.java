@@ -61,7 +61,7 @@ public class Server {
             try {
                 client = server.accept();
                 System.out.println("Connecté au client: " + client);
-                //Thread t = new Thread(() -> {
+                /*//Thread t = new Thread(() -> {
                 //    try {
                         objectInputStream = new ObjectInputStream(client.getInputStream());
                         objectOutputStream = new ObjectOutputStream(client.getOutputStream());
@@ -70,10 +70,10 @@ public class Server {
                 //    } catch (IOException | ClassNotFoundException e) {
                 //        throw new RuntimeException(e);
                 //    }
-                System.out.println("Client déconnecté!");//});
-                /*Runnable r = new ClientHandler(client);
+                System.out.println("Client déconnecté!");//});*/
+                Runnable r = new ClientHandler(client);
                 Thread t = new Thread(r);
-                t.start();*/
+                t.start();
             } catch (Exception e) {
                 e.printStackTrace();
             }
