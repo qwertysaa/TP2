@@ -205,7 +205,12 @@ public class Server {
             System.out.println("Inscription réussie!"); // déboguage
 
             } catch (IOException e) { //TODO gérer l'exception
-
+            String erreurMessage = "Il y a eu une erreur pour compléter l'inscription. (dans Server)";
+            try {
+                this.objectOutputStream.writeObject(erreurMessage);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             System.out.println("Erreur!");
 
             } catch (ClassNotFoundException e) {

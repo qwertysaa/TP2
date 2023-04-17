@@ -76,11 +76,10 @@ public class Modele {
             objectOutputStream.writeObject(formulaire);
 
             ObjectInputStream objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
-            String reussite = (String) objectInputStream.readObject();
-            return reussite;
+            String message = (String) objectInputStream.readObject();
+            return message;
         } catch (IOException e) {
-
-            String erreur = "Il y a eu une erreur pour compléter l'inscription.";
+            String erreur = "Il y a eu une erreur pour compléter l'inscription. (dans Modèle)";
             return erreur;
 
         } catch (ClassNotFoundException e) {

@@ -26,6 +26,8 @@ public class Controleur {
             System.out.println(prenom + " " + nom + " " + email + " " + matricule + " " + coursSelectionne.toString());
             System.out.println(this.modele.inscrireCours(prenom, nom, email, matricule, coursSelectionne));
 
+            Erreur.display("Erereur","non"); //TODO ** débogage
+
         });
     }
     public ObservableList<Course> getCoursDisponibles(String session){
