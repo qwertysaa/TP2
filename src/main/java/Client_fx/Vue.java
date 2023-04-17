@@ -30,6 +30,7 @@ public class Vue extends BorderPane {
     private TextField enterMatricule = new TextField();
     private Button envoyer = new Button("envoyer");
 
+
     Vue() {
 
         // Le VBox à gauche qui montre les cours disponibles
@@ -154,7 +155,9 @@ public class Vue extends BorderPane {
         // sont rentrés correctement et ensuite update la fiche d'inscription et envoyer en message
         HBox envoyerHBox = new HBox();
         envoyerHBox.getChildren().add(envoyer);
+        envoyer.setOnAction(e -> Erreur.display("Erereur","non"));
         rightVBox.getChildren().add(envoyerHBox);
+
 
         envoyer.setPadding(new Insets(10));
         envoyerHBox.setPadding(new Insets(10));
