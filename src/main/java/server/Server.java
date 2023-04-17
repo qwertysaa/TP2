@@ -9,17 +9,17 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * Classe représentant le modèle d'un serveur qui gère les inscriptions
- */
+     /**
+     * Classe représentant le modèle d'un serveur qui gère les inscriptions
+     */
 public class Server {
 
-    /**
+     /**
      * Commande de la ligne de commande correspondant à la commande pour l'inscription
      */
     public final static String REGISTER_COMMAND = "INSCRIRE";
 
-    /**
+     /**
      * Commande de la ligne de commande correspondant à la commande pour obtenir la liste de cours pour une session
      */
     public final static String LOAD_COMMAND = "CHARGER";
