@@ -2,13 +2,7 @@ package Client_fx;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import server.models.Course;
 
 public class Client_fx extends Application {
     public static void main(String[] args){
@@ -23,6 +17,12 @@ public class Client_fx extends Application {
 
         stage.setTitle("Inscription UdeM");
         stage.setScene(scene);
+        stage.show();
+
+        Erreur leErreur = new Erreur();
+        Scene sceneErreur = new Scene(leErreur, 400, 200);
+        stage.setTitle("Erreur");
+        stage.setScene(sceneErreur);
         stage.show();
     }
 }
