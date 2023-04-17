@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import server.models.Course;
 
@@ -33,11 +34,11 @@ public class Vue extends BorderPane {
 
         // Le VBox à gauche qui montre les cours disponibles
         VBox leftVBox = new VBox();
-        Scene scene = new Scene(leftVBox, 500, 500);
 
         // Pour mettre couleur Beige au fond
         leftVBox.setBackground(new Background(new BackgroundFill(Color.BEIGE, CornerRadii.EMPTY, Insets.EMPTY)));
-        Text textCours = new Text("                          Liste des cours");
+        Text textCours = new Text("              Liste des cours");
+        textCours.setFont(Font.font(18));
 
         // Separer le leftVBox en 3 HBox, cours HBox est le premier
         HBox coursHBox = new HBox();
@@ -68,7 +69,7 @@ public class Vue extends BorderPane {
         sepHoriz.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         leftVBox.getChildren().add(sepHoriz);
 
-        // Le dernier HBox dans le leftVBox qui contient boutons sessions et charger qui envoyent une demande au
+        // Le deux derniers HBoxs dans le leftVBox qui contient boutons session et charger qui envoyent une demande au
         // Serveur pour afficher les cours dispoibles dans la session désiré
         HBox bottomLeftHBox = new HBox();
         String[] sessions = {"Hiver", "Automne", "Ete"};
@@ -81,6 +82,9 @@ public class Vue extends BorderPane {
         bottomLeftHBox.getChildren().add(chargerHBox);
         bottomLeftHBox.setHgrow(chargerHBox, Priority.ALWAYS);
         leftVBox.getChildren().add(bottomLeftHBox);
+        charger.setPadding(new Insets(10));
+        session.setPadding(new Insets(6));
+        session.setValue("Session");
 
         // Ajouter de l'espace entre le table et les boutons
         leftVBox.setSpacing(20);
@@ -101,10 +105,11 @@ public class Vue extends BorderPane {
 
         // Le premier HBox dans le rightVBox qui contient le titre
         HBox inscription = new HBox();
-        Text textInscription = new Text("                         Formulaire d'inscription");
+        Text textInscription = new Text("            Formulaire d'inscription");
         inscription.getChildren().add(textInscription);
         rightVBox.getChildren().add(inscription);
         inscription.setPadding(new Insets(10));
+        textInscription.setFont(Font.font(18));
 
         // Le deuxième HBox dans le rightVBox qui contient le champ prenom du formulaire
         HBox prenom = new HBox();
