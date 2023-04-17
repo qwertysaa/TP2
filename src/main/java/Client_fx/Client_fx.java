@@ -19,7 +19,9 @@ public class Client_fx extends Application {
         stage.setScene(scene);
         stage.show();
 
+        Modele laModele = new Modele();
         Erreur leErreur = new Erreur();
+        ControleurErreur laControleur = new ControleurErreur(leModele, leErreur);
         Scene sceneErreur = new Scene(leErreur, 400, 200);
         stage.setTitle("Erreur");
         stage.setScene(sceneErreur);
