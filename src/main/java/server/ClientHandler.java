@@ -111,7 +111,7 @@ public class ClientHandler implements Runnable{
      */
     public void handleLoadCourses(String arg) {
         try{
-            //Créer liste d'objets Course à partir du fichier cours.txt
+            // Créer liste d'objets Course à partir du fichier cours.txt
             FileReader fr = new FileReader("src/main/java/server/data/cours.txt");
             BufferedReader reader = new BufferedReader(fr);
             ArrayList<Course> courses = new ArrayList<>();
@@ -123,7 +123,7 @@ public class ClientHandler implements Runnable{
                 courses.add(cours);
             }
 
-            //Créer la liste des cours pour la session spécifiée
+            // Créer la liste des cours pour la session spécifiée
             ArrayList<Course> coursSessionSpecifiee = new ArrayList<>();
             for (Course cours : courses) {
                 if ( (cours.getSession()).equals(arg) ) {
@@ -132,13 +132,15 @@ public class ClientHandler implements Runnable{
                 }
             }
 
-            //Renvoyer la liste des cours pour une session au client avec objectOutputStream
+            // Renvoyer la liste des cours pour une session au client avec objectOutputStream
             this.objectOutputStream.writeObject(coursSessionSpecifiee); //ajouter liste des cours correspondant à la
-            // session spécifiée dans fichier à envoyer au client
+            // Session spécifiée dans fichier à envoyer au client
             System.out.println(Arrays.asList(coursSessionSpecifiee) + "heehoo"); //pour débogage
 
         } catch (IOException ex){                // TODO gérer l'exception
+
             System.out.println("Erreur à l'ouverture du fichier");
+
         }
     }
 
