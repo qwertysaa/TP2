@@ -79,8 +79,10 @@ public class Modele {
             String reussite = (String) objectInputStream.readObject();
             return reussite;
         } catch (IOException e) {
+
             String erreur = "Il y a eu une erreur pour compléter l'inscription.";
             return erreur;
+
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
 
