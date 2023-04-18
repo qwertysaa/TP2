@@ -26,7 +26,7 @@ public class Controleur {
             String prenom = checkLettres(this.vue.getEnterPrenom().getText());
             String nom = checkLettres(this.vue.getEnterNom().getText());
             String email = checkEmail(this.vue.getEnterEmail().getText());
-            String matricule = checkNumbers(this.vue.getEnterMatricule().getText());
+            String matricule = this.vue.getEnterMatricule().getText();
             Course coursSelectionne = this.vue.getCoursSession().getSelectionModel().getSelectedItem();
             System.out.println(prenom + " " + nom + " " + email + " " + matricule + " " + coursSelectionne.toString());
             System.out.println(this.modele.inscrireCours(prenom, nom, email, matricule, coursSelectionne));
@@ -102,14 +102,4 @@ public class Controleur {
             coursDisponibles.add(course);
         }
         return coursDisponibles;
-    }public String checkNumbers(String valeur){
-        Boolean allNumbers = isAllNumbers(valeur);
-        if (allNumbers) {
-            return valeur;
-
-        }else{
-            messageOuErreur = "Erreur";
-            lesErreurs = lesErreurs + "Matricule ne doit contenir que des chiffres.\n";
-        }
-        return valeur;
-    }}
+   }}

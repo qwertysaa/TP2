@@ -119,3 +119,19 @@ Hiver	IFT2125
 Hiver	IFT2125				
 Hiver	IFT2125	a		a	
 Hiver	IFT2125	a		a	
+Automne	IFT1227	123455	H	Sarah	sarah.h
+Automne	IFT1227	123455	H	Sarah	sarah.h
+Automne	IFT1227	123455a	H	Sarah	sarah.h@umontreal.ca
+Automne	IFT1227	123455a	H	Sarah	sarah.h@umontreal.ca
+Automne	IFT2255	12344	H	Sarah	sarah.h
+Automne	IFT2255	12344	H	Sarah	sarah.h
+Automne	IFT2255	12344	H	Sarah	sarah.h@umontreal.ca
+Automne	IFT2255	12344	H	Sarah	sarah.h@umontreal.ca
+Automne	IFT2255	12345	He	Sarah	sarah.he
+Automne	IFT2255	12345	He	Sarah	sarah.he
+Automne	IFT2255	12345	He	Sarah	sarah.he@umontreal.ca
+Automne	IFT2255	12345	He	Sarah	sarah.he@umontreal.ca
+Automne	IFT2255	1234	H	Sarah	sara
+Automne	IFT2255	1234	H	Sarah	sara
+Automne	IFT2255	1234	H	Sarah	sara@umontreal.ca
+Automne	IFT2255	1234	H	Sarah	sara@umontreal.ca

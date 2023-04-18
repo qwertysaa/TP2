@@ -60,17 +60,6 @@ public class Server {
         while (true) {
             try {
                 client = server.accept();
-                /*System.out.println("Connecté au client: " + client);
-                Thread t = new Thread(() -> {
-                    try {
-                objectInputStream = new ObjectInputStream(client.getInputStream());
-                objectOutputStream = new ObjectOutputStream(client.getOutputStream());
-                listen();
-                disconnect();
-                    } catch (IOException | ClassNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
-                System.out.println("Client déconnecté!");});*/
                 Runnable r = new ClientHandler(client);
                 Thread t = new Thread(r);
                 t.start();
@@ -162,14 +151,12 @@ public class Server {
             for (Course cours : courses) {
                 if ( (cours.getSession()).equals(arg) ) {
                     coursSessionSpecifiee.add(cours);
-                    System.out.println(cours.toString() + "heehaa"); //pour débogage
                 }
             }
 
             //Renvoyer la liste des cours pour une session au client avec objectOutputStream
             this.objectOutputStream.writeObject(coursSessionSpecifiee); //ajouter liste des cours correspondant à la
             // session spécifiée dans fichier à envoyer au client
-            System.out.println(Arrays.asList(coursSessionSpecifiee) + "heehoo"); //pour débogage
 
         } catch (IOException ex){
             System.out.println("Erreur lors de la lecture du fichier ou de l'écriture de l'objet.");
@@ -192,22 +179,17 @@ public class Server {
             FileWriter fw = new FileWriter("src/main/java/server/data/inscription.txt", true);
             BufferedWriter writer = new BufferedWriter(fw);
 
-            System.out.println(form.toString()); //débogage
-            System.out.println(form.getCourse().toString()); //débogage
             String ligneInscription = "\n" + form.getCourse().getSession() +"\t"+ form.getCourse().getCode() +"\t"+
                     form.getMatricule() +"\t"+ form.getNom() +"\t"+ form.getPrenom() +"\t"+ form.getEmail();
-            System.out.println(ligneInscription); //pour déboguage
             writer.append(ligneInscription);
             writer.close();
 
             String inscriptionMessage = "Inscription réussie!";
             message = inscriptionMessage;
-            System.out.println(inscriptionMessage); // déboguage
 
             } catch (IOException | ClassNotFoundException e) {
             String erreurMessage = "Il y a eu une erreur pour compléter l'inscription. (dans Server)";
             message = erreurMessage;
-            System.out.println(erreurMessage); //débogage
             } finally {
             try {
                 this.objectOutputStream.writeObject(message);
