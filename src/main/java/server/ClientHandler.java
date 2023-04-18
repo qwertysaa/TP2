@@ -10,7 +10,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ClientHandler implements Runnable{
+public class ClientHandler implements Runnable {
     private Socket client;
     private final ArrayList<EventHandler> handlers;
     ObjectInputStream objectInputStream;
@@ -18,19 +18,22 @@ public class ClientHandler implements Runnable{
     public final static String REGISTER_COMMAND = "INSCRIRE";
     public final static String LOAD_COMMAND = "CHARGER";
 
-    public ClientHandler(Socket socket){
+    public ClientHandler(Socket socket) {
         this.client = socket;
         this.handlers = new ArrayList<EventHandler>();
         this.addEventHandler(this::handleEvents);
     }
+
     public void addEventHandler(EventHandler h) {
         this.handlers.add(h);
     }
+
     private void alertHandlers(String cmd, String arg) {
         for (EventHandler h : this.handlers) {
             h.handle(cmd, arg);
         }
     }
+
     @Override
     public void run() {
         try {
@@ -41,7 +44,7 @@ public class ClientHandler implements Runnable{
             listen();
             disconnect();
             System.out.println("Client déconnecté!");
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
@@ -66,8 +69,8 @@ public class ClientHandler implements Runnable{
     /**
      * Analyse la ligne de commande et la retourne séparée en commande et en arguments.
      *
-     * @param line  la ligne de commande
-     * @return      paire avec la commande et les arguments séparés
+     * @param line la ligne de commande
+     * @return paire avec la commande et les arguments séparés
      */
     public Pair<String, String> processCommandLine(String line) {
         String[] parts = line.split(" ");
@@ -90,8 +93,8 @@ public class ClientHandler implements Runnable{
     /**
      * Gère les commandes pour regarder la liste de cours pour une session et pour l'inscription.
      *
-     * @param cmd   commande
-     * @param arg   arguments
+     * @param cmd commande
+     * @param arg arguments
      */
     public void handleEvents(String cmd, String arg) {
         if (cmd.equals(REGISTER_COMMAND)) {
@@ -102,15 +105,16 @@ public class ClientHandler implements Runnable{
     }
 
     /**
-     Lire un fichier texte contenant des informations sur les cours et les transformer en liste d'objets 'Course'.
-     La méthode filtre les cours par la session spécifiée en argument.
-     Ensuite, elle renvoie la liste des cours pour une session au client en utilisant l'objet 'objectOutputStream'.
-     La méthode gère les exceptions si une erreur se produit lors de la lecture du fichier ou de l'écriture de l'objet
-     dans le flux.
-     @param arg la session pour laquelle on veut récupérer la liste des cours
+     * Lire un fichier texte contenant des informations sur les cours et les transformer en liste d'objets 'Course'.
+     * La méthode filtre les cours par la session spécifiée en argument.
+     * Ensuite, elle renvoie la liste des cours pour une session au client en utilisant l'objet 'objectOutputStream'.
+     * La méthode gère les exceptions si une erreur se produit lors de la lecture du fichier ou de l'écriture de l'objet
+     * dans le flux.
+     *
+     * @param arg la session pour laquelle on veut récupérer la liste des cours
      */
     public void handleLoadCourses(String arg) {
-        try{
+        try {
             // Créer liste d'objets Course à partir du fichier cours.txt
             FileReader fr = new FileReader("src/main/java/server/data/cours.txt");
             BufferedReader reader = new BufferedReader(fr);
@@ -126,7 +130,7 @@ public class ClientHandler implements Runnable{
             // Créer la liste des cours pour la session spécifiée
             ArrayList<Course> coursSessionSpecifiee = new ArrayList<>();
             for (Course cours : courses) {
-                if ( (cours.getSession()).equals(arg) ) {
+                if ((cours.getSession()).equals(arg)) {
                     coursSessionSpecifiee.add(cours);
                     System.out.println(cours.toString() + "heehaa"); //pour débogage
                 }
@@ -137,24 +141,23 @@ public class ClientHandler implements Runnable{
             // Session spécifiée dans fichier à envoyer au client
             System.out.println(Arrays.asList(coursSessionSpecifiee) + "heehoo"); //pour débogage
 
-        } catch (IOException ex){                // TODO gérer l'exception
-
-            System.out.println("Erreur à l'ouverture du fichier");
-
+        } catch (IOException ex) {
+            System.out.println("Erreur lors de la lecture du fichier ou de l'écriture de l'objet.");
         }
     }
 
     /**
-     Récupérer l'objet 'RegistrationForm' envoyé par le client en utilisant 'objectInputStream', l'enregistrer dans un
-     fichier texte
-     et renvoyer un message de confirmation au client.
-     La méthode gère les exceptions si une erreur se produit lors de la lecture de l'objet, l'écriture dans un fichier
-     ou dans le flux de sortie.
+     * Récupérer l'objet 'RegistrationForm' envoyé par le client en utilisant 'objectInputStream', l'enregistrer dans un
+     * fichier texte et renvoyer un message de confirmation au client.
+     * La méthode gère les exceptions si une erreur se produit lors de la lecture de l'objet, l'écriture dans un fichier
+     * ou dans le flux de sortie.
      */
     private final Object lockInscription = new Object();
+
     public void handleRegistration() {
 
         synchronized (lockInscription) {
+            String message = "";
             System.out.println("1st beep");
             try {
                 System.out.println("2nd beep");
@@ -174,15 +177,20 @@ public class ClientHandler implements Runnable{
                 writer.append(ligneInscription);
                 writer.close();
 
-                //TODO comment renvoyer message de confirmation au client si l'inscription est réussie?
                 String inscriptionMessage = "Inscription réussie!";
-                this.objectOutputStream.writeObject(inscriptionMessage);
-                System.out.println("Inscription réussie!"); // déboguage
+                message = inscriptionMessage;
+                System.out.println(inscriptionMessage); // déboguage
 
-            } catch (IOException e) { //TODO gérer l'exception
-
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
+            } catch (IOException | ClassNotFoundException e) {
+                String erreurMessage = "Il y a eu une erreur pour compléter l'inscription. (dans Server)";
+                message = erreurMessage;
+                System.out.println(erreurMessage); //débogage
+            } finally {
+                try {
+                    this.objectOutputStream.writeObject(message);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         }
     }

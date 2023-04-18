@@ -83,8 +83,8 @@ public class Server {
     /**
      * Passe les lignes de commande à tous les handlers du serveur.
      *
-     * @throws IOException
-     * @throws ClassNotFoundException
+     * @throws IOException              Erreur dans la lecture de l'objet reçu
+     * @throws ClassNotFoundException   Classe de l'objet lu non trouvée
      */
     public void listen() throws IOException, ClassNotFoundException {
         String line;
@@ -112,7 +112,7 @@ public class Server {
     /**
      * Déconnecte le client du serveur.
      *
-     * @throws IOException
+     * @throws IOException  Erreur lors de la fermeture des objectStreams ou du socket.
      */
     public void disconnect() throws IOException {
         objectOutputStream.close();
@@ -140,6 +140,7 @@ public class Server {
      Ensuite, elle renvoie la liste des cours pour une session au client en utilisant l'objet 'objectOutputStream'.
      La méthode gère les exceptions si une erreur se produit lors de la lecture du fichier ou de l'écriture de l'objet
      dans le flux.
+
      @param arg la session pour laquelle on veut récupérer la liste des cours
      */
     public void handleLoadCourses(String arg) {
@@ -170,19 +171,19 @@ public class Server {
             // session spécifiée dans fichier à envoyer au client
             System.out.println(Arrays.asList(coursSessionSpecifiee) + "heehoo"); //pour débogage
 
-        } catch (IOException ex){                // TODO gérer l'exception
-            System.out.println("Erreur à l'ouverture du fichier");
+        } catch (IOException ex){
+            System.out.println("Erreur lors de la lecture du fichier ou de l'écriture de l'objet.");
         }
     }
 
     /**
      Récupérer l'objet 'RegistrationForm' envoyé par le client en utilisant 'objectInputStream', l'enregistrer dans un
-     fichier texte
-     et renvoyer un message de confirmation au client.
+     fichier texte et renvoyer un message de confirmation au client.
      La méthode gère les exceptions si une erreur se produit lors de la lecture de l'objet, l'écriture dans un fichier
      ou dans le flux de sortie.
      */
     public void handleRegistration() {
+        String message = "";
         try {
             //Récupérer le RegistrationForm envoyé par le client
             RegistrationForm form = (RegistrationForm) objectInputStream.readObject();
@@ -199,22 +200,20 @@ public class Server {
             writer.append(ligneInscription);
             writer.close();
 
-            //TODO comment renvoyer message de confirmation au client si l'inscription est réussie?
             String inscriptionMessage = "Inscription réussie!";
-            this.objectOutputStream.writeObject(inscriptionMessage);
-            System.out.println("Inscription réussie!"); // déboguage
+            message = inscriptionMessage;
+            System.out.println(inscriptionMessage); // déboguage
 
-            } catch (IOException e) { //TODO gérer l'exception
+            } catch (IOException | ClassNotFoundException e) {
             String erreurMessage = "Il y a eu une erreur pour compléter l'inscription. (dans Server)";
+            message = erreurMessage;
+            System.out.println(erreurMessage); //débogage
+            } finally {
             try {
-                this.objectOutputStream.writeObject(erreurMessage);
+                this.objectOutputStream.writeObject(message);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
-            System.out.println("Erreur!");
-
-            } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
     }
 }
