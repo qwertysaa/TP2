@@ -25,7 +25,7 @@ public class Client_fx extends Application {
         stage.setScene(scene);
         stage.show();
 
-        //TODO ** //Erreur.display("Erreur","Invalid"); // Debogage
+        Erreur.display("Erreur","Image"); // Debogage
 
     }
 }

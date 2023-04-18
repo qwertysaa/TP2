@@ -43,15 +43,28 @@ public class Erreur {
         HBox titleHBox = new HBox();
         titleHBox.getChildren().add(type);
 
+        // si le title de display est Erreur, on affiche une image d'un X rouge, else, on affiche un image d'un ! blue
+        if (title == "Erreur"){
+            Image img = new Image("file:src/main/java/Client_fx/img.png");
+            ImageView imageView = new ImageView(img);
+            titleHBox.getChildren().add(imageView);
+            imageView.setFitWidth(35);
+            imageView.setFitHeight(35);
+            titleHBox.setSpacing(240);
+
+        }else {
+            Image img = new Image("file:src/main/java/Client_fx/img_1.png");
+            ImageView imageView = new ImageView(img);
+            titleHBox.getChildren().add(imageView);
+            imageView.setFitWidth(35);
+            imageView.setFitHeight(35);
+            titleHBox.setSpacing(205);
+
+        }
+
         // Ajouter le premier HBox dans le VBox et mettre de l'espace avant les lignes
         layout.getChildren().add(titleHBox);
         titleHBox.setPadding(new Insets(10));
-
-        // Image img = new Image("img.png");
-        // ImageView imageView = new ImageView(img);
-        // layout.getChildren().add(imageView);
-        // imageView.setFitWidth(200);
-        // imageView.setFitHeight(150);
 
         // Separateur qui separe le titre avec le(s) message horizontalement
         Separator separateur = new Separator();
@@ -85,37 +98,12 @@ public class Erreur {
         messageHBox.setPadding(new Insets(10));
         layout.setPadding(new Insets(15));
 
-        Image img = new Image("file:src/main/java/Client_fx/img.png");
-        ImageView imageView = new ImageView(img);
-        layout.getChildren().add(imageView);
-        imageView.setFitWidth(200);
-        imageView.setFitHeight(150);
 
         // Pour afficher le VBox. fonction showAndWait() fait en sorte que le client doit absolument fermer la fenetre
         // avant de faire d'autre choses.
         Scene sceneErreur = new Scene(layout,400,200);
         window.setScene(sceneErreur);
         window.showAndWait();
-
-        /** VBox erreurVBox = new VBox();
-        erreurVBox.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
-
-        Text textErreur = new Text("Erreur");
-        HBox erreurHBox = new HBox();
-        erreurHBox.getChildren().add(textErreur);
-        erreurVBox.getChildren().add(erreurHBox);
-
-        textErreur.setFont(Font.font(5));
-        erreurVBox.setPadding(new Insets(10));
-
-        Separator separateur = new Separator();
-        separateur.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-        erreurVBox.getChildren().add(separateur);
-
-        HBox messageHBox = new HBox();
-        Text textMessage = new Text("");
-        messageHBox.getChildren().add(textMessage);
-        erreurVBox.getChildren().add(messageHBox);**/
 
     }
 }
