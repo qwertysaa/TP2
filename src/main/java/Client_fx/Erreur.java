@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -14,9 +16,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import javax.swing.text.Element;
-import javax.swing.text.html.ImageView;
-import java.awt.*;
+import java.io.File;
+
+
 
 /*
  * Dans cette classe nous definissons les éléments graphiques d'une fenetre qui s'ouvre en appuyant sur le button
@@ -45,6 +47,7 @@ public class Erreur {
         layout.getChildren().add(titleHBox);
         titleHBox.setPadding(new Insets(10));
 
+<<<<<<< HEAD
         // Image img = new Image("img.png");
         // ImageView imageView = new ImageView(img);
         // layout.getChildren().add(imageView);
@@ -52,6 +55,8 @@ public class Erreur {
         // imageView.setFitHeight(150);
 
 
+=======
+>>>>>>> 97802cd620ac142d2933e944c873dc669a9669e4
         // Separateur qui separe le titre avec le(s) message horizontalement
         Separator separateur = new Separator();
         separateur.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -83,6 +88,12 @@ public class Erreur {
 
         messageHBox.setPadding(new Insets(10));
         layout.setPadding(new Insets(15));
+
+        Image img = new Image("file:src/main/java/Client_fx/img.png");
+        ImageView imageView = new ImageView(img);
+        layout.getChildren().add(imageView);
+        imageView.setFitWidth(200);
+        imageView.setFitHeight(150);
 
         // Pour afficher le VBox. fonction showAndWait() fait en sorte que le client doit absolument fermer la fenetre
         // avant de faire d'autre choses.

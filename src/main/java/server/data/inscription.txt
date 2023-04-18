@@ -1,4 +1,5 @@
 Automne	IFT2255	12345678	Michalis    Famelis	mfamelis@iro.umontreal.ca
+<<<<<<< HEAD
 Hiver	IFT2015	12345678	Leblanc Mathieu	mathieu@umontreal.ca
 Hiver	IFT2125			a	
 Ete	IFT2256			a	
@@ -26,3 +27,6 @@ Hiver	IFT2125			z
 Hiver	IFT2125		z	z	
 Hiver	IFT2125		z	z	z
 Hiver	IFT2125	z	z	z	z
+=======
+Hiver	IFT2015	12345678	Leblanc Mathieu	mathieu@umontreal.ca
+>>>>>>> 97802cd620ac142d2933e944c873dc669a9669e4
