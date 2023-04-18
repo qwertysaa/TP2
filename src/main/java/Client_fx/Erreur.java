@@ -47,16 +47,12 @@ public class Erreur {
         layout.getChildren().add(titleHBox);
         titleHBox.setPadding(new Insets(10));
 
-<<<<<<< HEAD
         // Image img = new Image("img.png");
         // ImageView imageView = new ImageView(img);
         // layout.getChildren().add(imageView);
         // imageView.setFitWidth(200);
         // imageView.setFitHeight(150);
 
-
-=======
->>>>>>> 97802cd620ac142d2933e944c873dc669a9669e4
         // Separateur qui separe le titre avec le(s) message horizontalement
         Separator separateur = new Separator();
         separateur.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));

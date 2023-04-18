@@ -30,3 +30,7 @@ Hiver	IFT2125	z	z	z	z
 =======
 Hiver	IFT2015	12345678	Leblanc Mathieu	mathieu@umontreal.ca
 >>>>>>> 97802cd620ac142d2933e944c873dc669a9669e4
+
+Automne	IFT1015	saa	saa		saa
+Automne	IFT1015	see	saa	saa	see
+Hiver	IFT1025	gse	efs	das	efse

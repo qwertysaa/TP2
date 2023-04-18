@@ -28,13 +28,7 @@ public class Controleur {
             String matricule = this.vue.getEnterMatricule().getText();
             Course coursSelectionne = this.vue.getCoursSession().getSelectionModel().getSelectedItem();
             System.out.println(prenom + " " + nom + " " + email + " " + matricule + " " + coursSelectionne.toString());
-<<<<<<< HEAD
-            System.out.println(this.modele.inscrireCours(prenom, nom, email, matricule, coursSelectionne));
-            if (prenom == "z"){
-                Erreur.display("Ereeereur","non");
-            }
 
-=======
             String message = this.modele.inscrireCours(prenom, nom, email, matricule, coursSelectionne);
             System.out.println("message reçu: " + message); //débogage
             if (message.equals("Inscription réussie!")){
@@ -42,7 +36,6 @@ public class Controleur {
             }else{
                 Erreur.display("Erreur",message);
             }
->>>>>>> 97802cd620ac142d2933e944c873dc669a9669e4
 
         });
 
