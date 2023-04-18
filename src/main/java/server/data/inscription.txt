@@ -119,3 +119,11 @@ Hiver	IFT2125
 Hiver	IFT2125				
 Hiver	IFT2125	a		a	
 Hiver	IFT2125	a		a	
+Hiver	IFT2125	12345	Badakhshan	iman	imanbadakhshan@umontreal.ca
+Hiver	IFT2125	12345	Badakhshan	iman	imanbadakhshan@umontreal.ca
+Hiver	IFT2125	1234	badakhshan	iman	lgkjblb@umontreal.ca
+Hiver	IFT2125	1234	badakhshan	iman	lgkjblb@umontreal.ca
+Hiver	IFT2125	1234	badakhshan	55	lgkjblb@umontreal.ca
+Hiver	IFT2125	1234	badakhshan	55	lgkjblb@umontreal.ca
+Hiver	IFT2125	1234	badakhshan	55	lgkjblb@umontl.ca
+Hiver	IFT2125	1234	badakhshan	55	lgkjblb@umontl.ca
