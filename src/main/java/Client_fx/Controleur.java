@@ -20,14 +20,20 @@ public class Controleur {
             this.vue.getCoursSession().setItems((getCoursDisponibles(sessionSelectionnee)));
         });
         this.vue.getEnvoyerButton().setOnAction((event) ->{
-            Erreur.display("Erereur","non"); //TODO ** débogage
+            Erreur.display("Erereur - test","non"); //TODO ** débogage
             String prenom = this.vue.getEnterPrenom().getText();
             String nom = this.vue.getEnterNom().getText();
             String email = this.vue.getEnterEmail().getText();
             String matricule = this.vue.getEnterMatricule().getText();
             Course coursSelectionne = this.vue.getCoursSession().getSelectionModel().getSelectedItem();
             System.out.println(prenom + " " + nom + " " + email + " " + matricule + " " + coursSelectionne.toString());
-            System.out.println(this.modele.inscrireCours(prenom, nom, email, matricule, coursSelectionne));
+            String message = this.modele.inscrireCours(prenom, nom, email, matricule, coursSelectionne);
+            System.out.println("message reçu: " + message); //débogage
+            if (message.equals("Inscription réussie!")){
+                Erreur.display("Réussite!",message);
+            }else{
+                Erreur.display("Erreur",message);
+            }
 
         });
     }
