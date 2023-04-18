@@ -65,6 +65,7 @@ public class Modele {
         try {
             // Envoi de la commande au serveur
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
+
             // *** À modifier, car répétition dans le code
             String ligne = "INSCRIRE";
             objectOutputStream.writeObject(ligne);

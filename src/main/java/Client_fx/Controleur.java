@@ -8,6 +8,7 @@ public class Controleur {
 
     private Modele modele;
     private Vue vue;
+    public String messageOuErreur = "";
 
     public Controleur(Modele m, Vue v) {
         this.modele = m;
@@ -25,11 +26,14 @@ public class Controleur {
             Course coursSelectionne = this.vue.getCoursSession().getSelectionModel().getSelectedItem();
             System.out.println(prenom + " " + nom + " " + email + " " + matricule + " " + coursSelectionne.toString());
             System.out.println(this.modele.inscrireCours(prenom, nom, email, matricule, coursSelectionne));
+            if (prenom == "z"){
+                Erreur.display("Ereeereur","non");
+            }
 
-            Erreur.display("Erereur","non"); //TODO ** débogage
 
         });
-    }
+
+    };
     public ObservableList<Course> getCoursDisponibles(String session){
         ObservableList<Course> coursDisponibles = FXCollections.observableArrayList();
         for (Course course : this.modele.voirSession(session)) {

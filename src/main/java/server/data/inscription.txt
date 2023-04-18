@@ -5,3 +5,24 @@ Ete	IFT2256			a
 Hiver	IFT2125	zz	z	z	z
 Automne	IFT2255	214	daw	fe	gdg
 Automne	IFT1227	2843	daad	das	diwn
+Ete	IFT2256	x	x	x	x
+Automne	IFT2255				
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125	d	d	d	d
+Hiver	IFT2125	d	d	d	d
+Hiver	IFT2125	d	d	d	d
+Hiver	IFT2125	d	d	d	d
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125			 	
+Hiver	IFT2125			z	
+Hiver	IFT2125			z	
+Hiver	IFT2125		z	z	
+Hiver	IFT2125		z	z	z
+Hiver	IFT2125	z	z	z	z

@@ -45,11 +45,11 @@ public class Erreur {
         layout.getChildren().add(titleHBox);
         titleHBox.setPadding(new Insets(10));
 
-        //Image img = new Image("img.png");
-        //ImageView imageView = new ImageView(img);
-        //layout.getChildren().add(imageView);
-        //imageView.setFitWidth(200);
-        //imageView.setFitHeight(150);
+        // Image img = new Image("img.png");
+        // ImageView imageView = new ImageView(img);
+        // layout.getChildren().add(imageView);
+        // imageView.setFitWidth(200);
+        // imageView.setFitHeight(150);
 
 
         // Separateur qui separe le titre avec le(s) message horizontalement
