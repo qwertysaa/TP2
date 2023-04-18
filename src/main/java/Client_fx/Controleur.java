@@ -4,6 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import server.models.Course;
 
+import java.io.File;
+
 public class Controleur {
 
     private Modele modele;
@@ -18,6 +20,7 @@ public class Controleur {
             this.vue.getCoursSession().setItems((getCoursDisponibles(sessionSelectionnee)));
         });
         this.vue.getEnvoyerButton().setOnAction((event) ->{
+            Erreur.display("Erereur","non"); //TODO ** débogage
             String prenom = this.vue.getEnterPrenom().getText();
             String nom = this.vue.getEnterNom().getText();
             String email = this.vue.getEnterEmail().getText();
@@ -25,8 +28,6 @@ public class Controleur {
             Course coursSelectionne = this.vue.getCoursSession().getSelectionModel().getSelectedItem();
             System.out.println(prenom + " " + nom + " " + email + " " + matricule + " " + coursSelectionne.toString());
             System.out.println(this.modele.inscrireCours(prenom, nom, email, matricule, coursSelectionne));
-
-            Erreur.display("Erereur","non"); //TODO ** débogage
 
         });
     }
