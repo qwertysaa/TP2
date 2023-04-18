@@ -37,3 +37,69 @@ Hiver	IFT1025			z
 Hiver	IFT1025			z	
 Hiver	IFT1025			z	
 Hiver	IFT1025			z	
+Hiver	IFT1025	125346	scscsccs	ssfsvv	ivonvavmlsvm@umontreal.ca
+Hiver	IFT1025	125346	scscsccs	ssfsvv	ivonvavmlsvm@umontreal.ca
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125			ss	
+Hiver	IFT2125			ss	
+Hiver	IFT2125		ss	ss	
+Hiver	IFT2125		ss	ss	
+Hiver	IFT2125		ss	ss	ssssdsd@umontreal.ca
+Hiver	IFT2125		ss	ss	ssssdsd@umontreal.ca
+Hiver	IFT2125		ss	ss	ssssdsd@umontreal.ca
+Hiver	IFT2125		ss	ss	ssssdsd@umontreal.ca
+Hiver	IFT2125		ss	ss	ssssdsd@umontreal.ca
+Hiver	IFT2125		ss	ss	ssssdsd@umontreal.ca
+Hiver	IFT2125		ss	ss	ssssdsd@umontreal.ca
+Hiver	IFT2125		ss	ss	ssssdsd@umontreal.ca
+Hiver	IFT2125		ss	ss	ssssdsd@umontreal.ca
+Hiver	IFT2125		ss	ss	ssssdsd@umontreal.ca
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125			s	
+Hiver	IFT2125			s	
+Hiver	IFT2125			1	
+Hiver	IFT2125			1	
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT1025				
+Hiver	IFT1025				
+Hiver	IFT1025			d	
+Hiver	IFT1025			d	
+Hiver	IFT1025	z	z	z	z
+Hiver	IFT1025	z	z	z	z
+Hiver	IFT1025	z	z	1	z
+Hiver	IFT1025	z	z	1	z
+Hiver	IFT1025	z		1	z
+Hiver	IFT1025	z		1	z
+Hiver	IFT1025	z			z
+Hiver	IFT1025	z			z
+Hiver	IFT1025				
+Hiver	IFT1025				
+Hiver	IFT1025				
+Hiver	IFT1025				
+Hiver	IFT1025	Z	Z	Z	Z
+Hiver	IFT1025	Z	Z	Z	Z
+Hiver	IFT1025	Z	Z	Z	Z
+Hiver	IFT1025	Z	Z	Z	Z
+Hiver	IFT1025	s	Z	Z	swd@umontreal.ca
+Hiver	IFT1025	s	Z	Z	swd@umontreal.ca
+Hiver	IFT2125	a	a	a	a
+Hiver	IFT2125	a	a	a	a
+Hiver	IFT2125	a	a	z	oce@umontreal.ca
+Hiver	IFT2125	a	a	z	oce@umontreal.ca
+Hiver	IFT2125	a	a	z	oce@umontreal.ca
+Hiver	IFT2125	a	a	z	oce@umontreal.ca
+Hiver	IFT2125	wdw	d	d	efelfm@umontreal.ca
+Hiver	IFT2125	wdw	d	d	efelfm@umontreal.ca
+Hiver	IFT2125	x	x	x	slcm@umontreal.ca
+Hiver	IFT2125	x	x	x	slcm@umontreal.ca
+Hiver	IFT1025	d	w	w	@umontreal.ca
+Hiver	IFT1025	d	w	w	@umontreal.ca

@@ -58,7 +58,7 @@ public class Erreur {
             titleHBox.getChildren().add(imageView);
             imageView.setFitWidth(35);
             imageView.setFitHeight(35);
-            titleHBox.setSpacing(240);
+            titleHBox.setSpacing(205);
 
         }
 
@@ -66,11 +66,6 @@ public class Erreur {
         layout.getChildren().add(titleHBox);
         titleHBox.setPadding(new Insets(10));
 
-        // Image img = new Image("img.png");
-        // ImageView imageView = new ImageView(img);
-        // layout.getChildren().add(imageView);
-        // imageView.setFitWidth(200);
-        // imageView.setFitHeight(150);
         // Separateur qui separe le titre avec le(s) message horizontalement
         Separator separateur = new Separator();
         separateur.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));

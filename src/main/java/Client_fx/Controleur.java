@@ -11,7 +11,8 @@ public class Controleur {
 
     private Modele modele;
     private Vue vue;
-    public String messageOuErreur = "";
+    public String messageOuErreur = "Message";
+    public String lesErreurs = "";
 
     public Controleur(Modele m, Vue v) {
         this.modele = m;
@@ -31,12 +32,13 @@ public class Controleur {
             System.out.println(this.modele.inscrireCours(prenom, nom, email, matricule, coursSelectionne));
             String message = this.modele.inscrireCours(prenom, nom, email, matricule, coursSelectionne);
             System.out.println("message reçu: " + message); //débogage
-            /** if (message.equals("Inscription réussie!")){
+            if (messageOuErreur.equals("Message")){
                 Erreur.display("Message",message);
             }else{
-                Erreur.display("Erreur",message);
-            }**/
-
+                Erreur.display("Erreur",lesErreurs);
+                messageOuErreur = "Message";
+                lesErreurs="";
+            }
 
         });
 
@@ -71,26 +73,36 @@ public class Controleur {
         Boolean allLetters = isAllLetters(valeur);
         if (allLetters) {
             return valeur;
+
         }else{
-            throw new WrongEntryException("Nom ou prénom ne doit contenir que des lettres.");
+            messageOuErreur = "Erreur";
+            lesErreurs = lesErreurs + "Nom ou prénom ne doit contenir que des lettres.\n";
         }
+        return valeur;
     }
+    public String checkNumbers(String valeur){
+        Boolean allNumbers = isAllNumbers(valeur);
+        if (allNumbers) {
+            return valeur;
+
+        }else{
+            messageOuErreur = "Erreur";
+            lesErreurs = lesErreurs + "Matricule ne doit contenir que des chiffres.\n";
+        }
+        return valeur;
     public String checkEmail(String valeur){
         Boolean bonEmail = valeur.endsWith("@umontreal.ca");
         if (bonEmail) {
             return valeur;
+
         }else{
-            throw new WrongEntryException("Courriel doit venir de l'Université de Montréal.");
+            messageOuErreur = "Erreur";
+            lesErreurs = lesErreurs + "Courriel doit venir de l'Université de Montréal.\n";
+            // throw new WrongEntryException("Courriel doit venir de l'Université de Montréal.");
         }
+        return valeur;
     }
-    public String checkLettres(String valeur){
-        Boolean allLetters =
-        if (allLetters) {
-            return valeur;
-        }else{
-            throw new WrongEntryException("Nom ou prénom ne doit contenir que des lettres.");
-        }
-    }
+
 
     public ObservableList<Course> getCoursDisponibles(String session){
         ObservableList<Course> coursDisponibles = FXCollections.observableArrayList();
