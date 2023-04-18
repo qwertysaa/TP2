@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import server.models.Course;
 
 import java.io.File;
+import java.io.IOError;
 
 public class Controleur {
 
@@ -21,32 +22,76 @@ public class Controleur {
             this.vue.getCoursSession().setItems((getCoursDisponibles(sessionSelectionnee)));
         });
         this.vue.getEnvoyerButton().setOnAction((event) ->{
-            Erreur.display("Erereur - test","non"); //TODO ** débogage
-            String prenom = this.vue.getEnterPrenom().getText();
-            String nom = this.vue.getEnterNom().getText();
-            String email = this.vue.getEnterEmail().getText();
+            String prenom = checkLettres(this.vue.getEnterPrenom().getText());
+            String nom = checkLettres(this.vue.getEnterNom().getText());
+            String email = checkEmail(this.vue.getEnterEmail().getText());
             String matricule = this.vue.getEnterMatricule().getText();
             Course coursSelectionne = this.vue.getCoursSession().getSelectionModel().getSelectedItem();
             System.out.println(prenom + " " + nom + " " + email + " " + matricule + " " + coursSelectionne.toString());
-<<<<<<< HEAD
             System.out.println(this.modele.inscrireCours(prenom, nom, email, matricule, coursSelectionne));
-            if (prenom == "z"){
-                Erreur.display("Ereeereur","non");
-            }
-
-=======
             String message = this.modele.inscrireCours(prenom, nom, email, matricule, coursSelectionne);
             System.out.println("message reçu: " + message); //débogage
-            if (message.equals("Inscription réussie!")){
-                Erreur.display("Réussite!",message);
+            /** if (message.equals("Inscription réussie!")){
+                Erreur.display("Message",message);
             }else{
                 Erreur.display("Erreur",message);
-            }
->>>>>>> 97802cd620ac142d2933e944c873dc669a9669e4
+            }**/
+
 
         });
 
     };
+
+
+    public boolean isAllLetters(String value) {
+        char[] chars = value.toCharArray();
+        for (char c : chars) {
+            if(!Character.isLetter(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean isAllNumbers(String value) {
+        char[] chars = value.toCharArray();
+        for (char c : chars) {
+            if(!Character.isLetter(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**Vérifie si la valeur entrée ne contient que des lettres.
+     *
+     * @param valeur
+     * @return
+     */
+    public String checkLettres(String valeur){
+        Boolean allLetters = isAllLetters(valeur);
+        if (allLetters) {
+            return valeur;
+        }else{
+            throw new WrongEntryException("Nom ou prénom ne doit contenir que des lettres.");
+        }
+    }
+    public String checkEmail(String valeur){
+        Boolean bonEmail = valeur.endsWith("@umontreal.ca");
+        if (bonEmail) {
+            return valeur;
+        }else{
+            throw new WrongEntryException("Courriel doit venir de l'Université de Montréal.");
+        }
+    }
+    public String checkLettres(String valeur){
+        Boolean allLetters =
+        if (allLetters) {
+            return valeur;
+        }else{
+            throw new WrongEntryException("Nom ou prénom ne doit contenir que des lettres.");
+        }
+    }
+
     public ObservableList<Course> getCoursDisponibles(String session){
         ObservableList<Course> coursDisponibles = FXCollections.observableArrayList();
         for (Course course : this.modele.voirSession(session)) {
