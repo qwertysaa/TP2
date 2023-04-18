@@ -1,4 +1,4 @@
-package server;
+package Client_simple;
 
 import server.models.Course;
 import server.models.RegistrationForm;

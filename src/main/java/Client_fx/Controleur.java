@@ -102,4 +102,5 @@ public class Controleur {
             coursDisponibles.add(course);
         }
         return coursDisponibles;
-    }}
+    }
+}

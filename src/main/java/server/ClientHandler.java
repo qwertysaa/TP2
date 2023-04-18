@@ -40,7 +40,6 @@ public class ClientHandler implements Runnable {
             System.out.println("Connecté au client: " + client);
             this.objectInputStream = new ObjectInputStream(client.getInputStream());
             this.objectOutputStream = new ObjectOutputStream(client.getOutputStream());
-            System.out.println("bip");
             listen();
             disconnect();
             System.out.println("Client déconnecté!");
@@ -132,14 +131,12 @@ public class ClientHandler implements Runnable {
             for (Course cours : courses) {
                 if ((cours.getSession()).equals(arg)) {
                     coursSessionSpecifiee.add(cours);
-                    System.out.println(cours.toString() + "heehaa"); //pour débogage
                 }
             }
 
             // Renvoyer la liste des cours pour une session au client avec objectOutputStream
             this.objectOutputStream.writeObject(coursSessionSpecifiee); //ajouter liste des cours correspondant à la
             // Session spécifiée dans fichier à envoyer au client
-            System.out.println(Arrays.asList(coursSessionSpecifiee) + "heehoo"); //pour débogage
 
         } catch (IOException ex) {
             System.out.println("Erreur lors de la lecture du fichier ou de l'écriture de l'objet.");
@@ -158,33 +155,25 @@ public class ClientHandler implements Runnable {
 
         synchronized (lockInscription) {
             String message = "";
-            System.out.println("1st beep");
             try {
-                System.out.println("2nd beep");
                 //Récupérer le RegistrationForm envoyé par le client
                 RegistrationForm form = (RegistrationForm) objectInputStream.readObject();
-                System.out.println("3rd beep");
 
                 //Enregistrer l'inscription dans inscription.txt
                 FileWriter fw = new FileWriter("src/main/java/server/data/inscription.txt", true);
                 BufferedWriter writer = new BufferedWriter(fw);
 
-                System.out.println(form.toString()); //débogage
-                System.out.println(form.getCourse().toString()); //débogage
                 String ligneInscription = "\n" + form.getCourse().getSession() + "\t" + form.getCourse().getCode() + "\t" +
                         form.getMatricule() + "\t" + form.getNom() + "\t" + form.getPrenom() + "\t" + form.getEmail();
-                System.out.println(ligneInscription); //pour déboguage
                 writer.append(ligneInscription);
                 writer.close();
 
                 String inscriptionMessage = "Inscription réussie!";
                 message = inscriptionMessage;
-                System.out.println(inscriptionMessage); // déboguage
 
             } catch (IOException | ClassNotFoundException e) {
                 String erreurMessage = "Il y a eu une erreur pour compléter l'inscription. (dans Server)";
                 message = erreurMessage;
-                System.out.println(erreurMessage); //débogage
             } finally {
                 try {
                     this.objectOutputStream.writeObject(message);
