@@ -6,14 +6,24 @@ import server.models.Course;
 
 import java.io.File;
 import java.io.IOError;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+/**
+ * Classe représentant le controleur de client_fx
+ */
 public class Controleur {
 
     private Modele modele;
     private Vue vue;
     public String messageOuErreur = "Message";
-    public String lesErreurs = "";
+    public String lesErreurs = "Le formulaire est invalid. \n";
 
+    /**
+     * Constructeur du controleur
+     * @param m modele donné en paramètre pour ce controleur
+     * @param v vue donnée en paramètre pour ce controleur
+     */
     public Controleur(Modele m, Vue v) {
         this.modele = m;
         this.vue = v;
@@ -23,79 +33,138 @@ public class Controleur {
             this.vue.getCoursSession().setItems((getCoursDisponibles(sessionSelectionnee)));
         });
         this.vue.getEnvoyerButton().setOnAction((event) ->{
-            String prenom = checkLettres(this.vue.getEnterPrenom().getText());
-            String nom = checkLettres(this.vue.getEnterNom().getText());
+        try {
+
+            // Vérifie si tout les champs de formulaires sont valides.
+            String prenom = checkPrenom(this.vue.getEnterPrenom().getText());
+            String nom = checkNom(this.vue.getEnterNom().getText());
             String email = checkEmail(this.vue.getEnterEmail().getText());
-            String matricule = this.vue.getEnterMatricule().getText();
+            String matricule = checkNumber(this.vue.getEnterMatricule().getText());
+
             Course coursSelectionne = this.vue.getCoursSession().getSelectionModel().getSelectedItem();
-            System.out.println(prenom + " " + nom + " " + email + " " + matricule + " " + coursSelectionne.toString());
+
             System.out.println(this.modele.inscrireCours(prenom, nom, email, matricule, coursSelectionne));
             String message = this.modele.inscrireCours(prenom, nom, email, matricule, coursSelectionne);
-            System.out.println("message reçu: " + message); //débogage
+
             if (messageOuErreur.equals("Message")){
-                Erreur.display("Message",message);
-            }else{
+                String messageFelicitation = "Félicitation! " + prenom + " " + nom + " est inscrit(e) \n " +
+                        "avec succès pour le cours "+ coursSelectionne.getCode() + "!";
+
+                // Ouvre une fenetre pop qui affiche le message félicitation
+                Erreur.display("Message", messageFelicitation);
+                lesErreurs="Le formulaire est invalid. \n";
+
+            } else {
+
+                // Ouvre une fenetre pop qui affiche les messages d'erreurs
                 Erreur.display("Erreur",lesErreurs);
                 messageOuErreur = "Message";
-                lesErreurs="";
+                lesErreurs="Le formulaire est invalid. \n";
+
             }
+        } catch (NullPointerException e){
+            String messageCours = "Veuillez choisir un cours parmis la liste.";
+            Erreur.display("Erreur", messageCours);
+        }
 
         });
 
     };
 
-
-    public boolean isAllLetters(String value) {
-        char[] chars = value.toCharArray();
-        for (char c : chars) {
-            if(!Character.isLetter(c)) {
-                return false;
-            }
-        }
-        return true;
-    }
-    public boolean isAllNumbers(String value) {
-        char[] chars = value.toCharArray();
-        for (char c : chars) {
-            if(!Character.isLetter(c)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**Vérifie si la valeur entrée ne contient que des lettres.
+    /**Vérifie si le champs "Nom" est valide.
      *
-     * @param valeur
-     * @return
+     * @param valeur valeur entrée par le client
+     * @return  retourne la valeur du champ nom
      */
-    public String checkLettres(String valeur){
-        Boolean allLetters = isAllLetters(valeur);
-        if (allLetters) {
+    public String checkNom(String valeur){
+        Pattern p = Pattern.compile("[a-zA-Z]+");
+        Matcher m = p.matcher(valeur);
+
+        if (m.find() && m.group().equals(valeur)){
+
             return valeur;
 
         }else{
+
             messageOuErreur = "Erreur";
-            lesErreurs = lesErreurs + "Nom ou prénom ne doit contenir que des lettres.\n";
+            lesErreurs = lesErreurs + "Le champs 'Nom' est invalid!\n";
+
         }
         return valeur;
     }
 
+    /**Vérifie si le champs "Prenom" est valide.
+     *
+     * @param valeur valeur entrée par le client
+     * @return  retourne la valeur du champ prenom
+     */
+    public String checkPrenom(String valeur) {
+        Pattern p = Pattern.compile("[a-zA-Z]+");
+        Matcher m = p.matcher(valeur);
 
+        if (m.find() && m.group().equals(valeur)) {
+
+            return valeur;
+
+        } else {
+
+            messageOuErreur = "Erreur";
+            lesErreurs = lesErreurs + "Le champs 'Prénom' est invalid!\n";
+
+        }
+        return valeur;
+    }
+
+    /**Vérifie si le champs "Email" est valide.
+     *
+     * @param valeur valeur entrée par le client
+     * @return  retourne la valeur du champ email
+     */
     public String checkEmail(String valeur){
-        Boolean bonEmail = valeur.endsWith("@umontreal.ca");
-        if (bonEmail) {
+        Pattern p = Pattern.compile("[a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+");
+        Matcher m = p.matcher(valeur);
+
+        if (m.find() && m.group().equals(valeur)){
+
             return valeur;
 
         }else{
+
             messageOuErreur = "Erreur";
-            lesErreurs = lesErreurs + "Courriel doit venir de l'Université de Montréal.\n";
-            // throw new WrongEntryException("Courriel doit venir de l'Université de Montréal.");
+            lesErreurs = lesErreurs + "Le champs 'Email' est invalid!\n";
+
+        }
+        return valeur;
+    }
+
+    /**Vérifie si le champs "Matricule" est valide.
+     *
+     * @param valeur valeur entrée par le client
+     * @return  retourne la valeur du champ matricule
+     */
+    public String checkNumber(String valeur) {
+        Pattern p = Pattern.compile("[0-9]+");
+        Matcher m = p.matcher(valeur);
+
+        if (m.find() && m.group().equals(valeur)) {
+
+            return valeur;
+
+        } else {
+
+            messageOuErreur = "Erreur";
+            lesErreurs = lesErreurs + "Le champs 'Matricule' est invalide!\n";
+
         }
         return valeur;
     }
 
 
+    /** Reçoit les cours disponibles et retourne la liste des cours pour le tableau.
+     *
+     * @param session   session désirée
+     * @return  retourne une liste prise en compte par le tableau TableView
+     */
     public ObservableList<Course> getCoursDisponibles(String session){
         ObservableList<Course> coursDisponibles = FXCollections.observableArrayList();
         for (Course course : this.modele.voirSession(session)) {
@@ -103,4 +172,5 @@ public class Controleur {
         }
         return coursDisponibles;
     }
+
 }

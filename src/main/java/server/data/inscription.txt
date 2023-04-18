@@ -146,3 +146,94 @@ Automne	IFT2255	1234	H	Sarah	sara
 Automne	IFT2255	1234	H	Sarah	sara@umontreal.ca
 Automne	IFT2255	1234	H	Sarah	sara@umontreal.ca
 >>>>>>> 5ad03f7c0d04657b5a816e544fac67e03f285295
+
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125	z	z	z	z
+Hiver	IFT2125	z	z	z	z
+Hiver	IFT2125	z	z	z	z@umontreal.ca
+Hiver	IFT2125	z	z	z	z@umontreal.ca
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125		3	2	
+Hiver	IFT2125		3	2	
+Hiver	IFT2125		3	a	
+Hiver	IFT2125		3	a	
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125	w	w	w	w
+Hiver	IFT2125	w	w	w	w
+Hiver	IFT2125	23214	cocpsc,	fecsac	csc@umontreal.ca
+Hiver	IFT2125	23214	cocpsc,	fecsac	csc@umontreal.ca
+Hiver	IFT2125	23214	cocpsc	fecsac	csc@umontreal.ca
+Hiver	IFT2125	23214	cocpsc	fecsac	csc@umontreal.ca
+Hiver	IFT2125	123dsc	cocpsc	fecsac	csc@umontreal.ca
+Hiver	IFT2125	123dsc	cocpsc	fecsac	csc@umontreal.ca
+Hiver	IFT2125	123dsc	cocpsc	fecsacd1	csc@umontreal.ca
+Hiver	IFT2125	123dsc	cocpsc	fecsacd1	csc@umontreal.ca
+Hiver	IFT2125	123dsc	cocpsc2	fecsacd1	csc@umontreal.ca
+Hiver	IFT2125	123dsc	cocpsc2	fecsacd1	csc@umontreal.ca
+Hiver	IFT2125	123dsc	cocpsc2	fecsacd1	csc@umontral.ca
+Hiver	IFT2125	123dsc	cocpsc2	fecsacd1	csc@umontral.ca
+Hiver	IFT2125	123dsc		fecsacd1	csc@umontral.ca
+Hiver	IFT2125	123dsc		fecsacd1	csc@umontral.ca
+Hiver	IFT2125	123dsc			csc@umontral.ca
+Hiver	IFT2125	123dsc			csc@umontral.ca
+Hiver	IFT2125	324	scscsc	css	scsc@umontreal.ca
+Hiver	IFT2125	324	scscsc	css	scsc@umontreal.ca
+Hiver	IFT2125	324	scscsc	css	scsc@umontral.ca
+Hiver	IFT2125	324	scscsc	css	scsc@umontral.ca
+Hiver	IFT2125	324	scscsc	css	scsc@umontreal.ca
+Hiver	IFT2125	324	scscsc	css	scsc@umontreal.ca
+Hiver	IFT2125	324	scsc2	css	scsc@umontreal.ca
+Hiver	IFT2125	324	scsc2	css	scsc@umontreal.ca
+Hiver	IFT2125	324	scscd	css	scsc@umontreal.ca
+Hiver	IFT2125	324	scscd	css	scsc@umontreal.ca
+Hiver	IFT2125	324	scscd	css11	scsc@umontreal.ca
+Hiver	IFT2125	324	scscd	css11	scsc@umontreal.ca
+Hiver	IFT2125	324	scscd		scsc@umontreal.ca
+Hiver	IFT2125	324	scscd		scsc@umontreal.ca
+Hiver	IFT2125	324			scsc@umontreal.ca
+Hiver	IFT2125	324			scsc@umontreal.ca
+Hiver	IFT2125	324	wdxw	xwxw	scsc@umontreal.ca
+Hiver	IFT2125	324	wdxw	xwxw	scsc@umontreal.ca
+Hiver	IFT2125	wx	wdxw	xwxw	scsc@umontreal.ca
+Hiver	IFT2125	wx	wdxw	xwxw	scsc@umontreal.ca
+Hiver	IFT2125	wx	wdw1231	xwxw	scsc@umontreal.ca
+Hiver	IFT2125	wx	wdw1231	xwxw	scsc@umontreal.ca
+Hiver	IFT2125	wx	wdw2	xwxw	scsc@umotreal.ca
+Hiver	IFT2125	wx	wdw2	xwxw	scsc@umotreal.ca
+Hiver	IFT2125	wx	wdw	xwxw	scsc@umotreal.ca
+Hiver	IFT2125	wx	wdw	xwxw	scsc@umotreal.ca
+Hiver	IFT2125	wx	wdw23	xwxw	scsc@umotreal.ca
+Hiver	IFT2125	wx	wdw23	xwxw	scsc@umotreal.ca
+Hiver	IFT2125	wx	wdw23qe	xwxw	scsc@umotreal.ca
+Hiver	IFT2125	wx	wdw23qe	xwxw	scsc@umotreal.ca
+Hiver	IFT2125	2092	ef	e	cecml@umontreal.ca
+Hiver	IFT2125	2092	ef	e	cecml@umontreal.ca
+Hiver	IFT2125	2092	ef	e	cecml@umntreal.ca
+Hiver	IFT2125	2092	ef	e	cecml@umntreal.ca
+Hiver	IFT2125	2092	ef	e	cecmlumntreal.ca
+Hiver	IFT2125	2092	ef	e	cecmlumntreal.ca
+Hiver	IFT2125	2092	ef	e	cecml@
+Hiver	IFT2125	2092	ef	e	cecml@
+Hiver	IFT2125	2092	ef	e	cecml@fce
+Hiver	IFT2125	2092	ef	e	cecml@fce
+Hiver	IFT2125	2092	ef	e	cecml@fce.ca
+Hiver	IFT2125	2092	ef	e	cecml@fce.ca
+Hiver	IFT2125	2092	ef	e	
+Hiver	IFT2125	2092	ef	e	
+Hiver	IFT2125	c	c	c	c
+Hiver	IFT2125	c	c	c	c
+Hiver	IFT2125	c	c	c	c
+Hiver	IFT2125	c	c	c	c
+Hiver	IFT2125	c	c	c	c
+Hiver	IFT2125	c	c	c	c
+Hiver	IFT2125	23	c	c	c
+Hiver	IFT2125	23	c	c	c
+Hiver	IFT2125	2323	acc	dcac	aec@cecooa.ca
+Hiver	IFT2125	2323	acc	dcac	aec@cecooa.ca
+Hiver	IFT1025	5546	jtrf	b  m	jfjf@umontreal.ca
+Hiver	IFT1025	5546	jtrf	b  m	jfjf@umontreal.ca
+Hiver	IFT1025	5546	jtrf	bm	jfjf@umontreal.ca
+Hiver	IFT1025	5546	jtrf	bm	jfjf@umontreal.ca

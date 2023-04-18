@@ -14,11 +14,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import server.models.Course;
 
-/*
- * Dans cette classe nous definissons les éléments graphiques de notre
- * application.
- * Notez que cette classe est completement independante de toute definition
- * de comportement.
+/**
+ * Dans cette classe nous définissons les éléments graphiques de notre application.
+ * Notez que cette classe est complètement indépendante de toute définition de comportement.
  */
 public class Vue extends BorderPane {
     private TableView<Course> coursSession = new TableView<>();
@@ -30,8 +28,10 @@ public class Vue extends BorderPane {
     private TextField enterMatricule = new TextField();
     private Button envoyer = new Button("envoyer");
 
-
-    Vue() {
+    /**
+     * Constructeur de la classe qui initialise les positions de ses composantes.
+     */
+    public Vue() {
 
         // Le VBox à gauche qui montre les cours disponibles
         VBox leftVBox = new VBox();
@@ -41,7 +41,7 @@ public class Vue extends BorderPane {
         Text textCours = new Text("              Liste des cours");
         textCours.setFont(Font.font(18));
 
-        // Separer le leftVBox en 3 HBox, cours HBox est le premier
+        // Séparer le leftVBox en 3 HBox, cours HBox est le premier
         HBox coursHBox = new HBox();
         coursHBox.getChildren().add(textCours);
         leftVBox.getChildren().add(coursHBox);
@@ -87,7 +87,7 @@ public class Vue extends BorderPane {
         session.setPadding(new Insets(6));
         session.setValue("Session");
 
-        // Ajouter de l'espace entre le table et les boutons
+        // Ajouter de l'espace entre la table et les boutons
         leftVBox.setSpacing(20);
 
         this.setLeft(leftVBox);
@@ -165,27 +165,59 @@ public class Vue extends BorderPane {
         this.setRight(rightVBox);
     }
 
+    /**
+     * Getter qui retourne le tableau
+     * @return  retourne la composante TableView
+     */
     public TableView<Course> getCoursSession() {
         return this.coursSession;
     }
+    /**
+     * Getter qui retourne le menu défilant
+     * @return  retourne la composante ChoiceBox
+     */
     public ChoiceBox<String> getSession() {
         return session;
     }
+    /**
+     * Getter qui retourne le bouton charger
+     * @return  retourne la composante button charger
+     */
     public Button getChargerButton() {
         return this.charger;
     }
+    /**
+     * Getter qui retourne le champ de texte prenom
+     * @return  retourne la composante TextField
+     */
     public TextField getEnterPrenom() {
         return enterPrenom;
     }
+    /**
+     * Getter qui retourne le champ de texte nom
+     * @return  retourne la composante TextField
+     */
     public TextField getEnterNom() {
         return enterNom;
     }
+    /**
+     * Getter qui retourne le champ de texte email
+     * @return  retourne la composante TextField
+     */
     public TextField getEnterEmail() {
         return enterEmail;
     }
+    /**
+     * Getter qui retourne le champ de texte matricule
+     * @return  retourne la composante TextField
+     */
     public TextField getEnterMatricule() {
         return enterMatricule;
     }
+    /**
+     * Getter qui retourne le bouton envoyer
+     * @return  retourne le button envoyer
+     */
     public Button getEnvoyerButton() {
         return this.envoyer;
     }

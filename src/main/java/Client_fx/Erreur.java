@@ -20,23 +20,27 @@ import java.io.File;
 
 
 
-/*
- * Dans cette classe nous definissons les éléments graphiques d'une fenetre qui s'ouvre en appuyant sur le button
- * envoyer de classe vue.java. Cette dernière affiche soit une message félicitation, soit des erreurs à propos des
- * champs de formulaire.
+/**
+ * Dans cette classe, nous définissons les éléments graphiques d'une fenêtre qui s'ouvre en appuyant sur le button
+ * "envoyer" implémentée dans la classe vue.java. Cette dernière affiche soit un message félicitation, soit des messages
+ * d'erreurs à propos des champs de formulaire.
  */
-
 public class Erreur {
+    /**Affiche la fenêtre pop-up
+     *
+     * @param title titre à afficher
+     * @param message   message à afficher
+     */
     public static void display(String title, String message) {
         Stage window = new Stage();
         VBox layout = new VBox();
 
-        // Modality fait en sorte que le client ne peut pas faire quoi de soit avant de fermer la fenetre Erreur.
+        // Modality fait en sorte que le client ne peut pas faire quoi ce soit avant de fermer la fenêtre Erreur.
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
 
-        // Label type est soit "Message", soit "Erreur". Ce dernier est utilisé dans le titre de la fenetre ainsi que
-        // La première ligne de texte
+        // Label type est soit "Message", soit "Erreur". Ce dernier est utilisé dans le titre de la fenêtre ainsi que
+        // pour la première ligne de texte.
         Label type = new Label();
         type.setText(title);
         type.setFont(Font.font(25));
@@ -71,7 +75,7 @@ public class Erreur {
         separateur.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         layout.getChildren().add(separateur);
 
-        // Label qui affiche les messages ou les erreur. On le met dans une deuxième HBox
+        // Label qui affiche les messages ou les erreurs. On le met dans une deuxième HBox
         Label messageText = new Label();
         messageText.setText(message);
         HBox messageHBox = new HBox();
@@ -82,8 +86,8 @@ public class Erreur {
         HBox buttonHBox = new HBox();
         Label vide = new Label();
 
-        // On a mit un text vide avant le button pour pouvoir ensuite mettre une espace en devant. Ce qui fait que
-        // le button soit à droite. Pour une raison inconnue, Allignement ou setRight ne fonctionnaient pas.
+        // On a mis un text vide avant le button pour pouvoir ensuite mettre une espace en devant. Ce qui fait que
+        // le button soit à droite. Pour une raison inconnue, Allignement et setRight ne fonctionnaient pas.
         vide.setText("");
         buttonHBox.getChildren().add(vide);
         Button okButton = new Button("Ok");

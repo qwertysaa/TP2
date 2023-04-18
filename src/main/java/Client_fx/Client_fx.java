@@ -10,12 +10,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import server.models.Course;
 
+/**
+ * Classe principale de client_fx
+ */
 public class Client_fx extends Application {
-    public static void main(String[] args){
-        launch(args);
-    }
     @Override
-    public void start(Stage stage) throws Exception {
+    /**
+     * Méthode start de client_fx
+     */
+    public void start(Stage stage) {
         Modele leModele = new Modele();
         Vue laVue = new Vue();
         Controleur leControleur = new Controleur(leModele, laVue);
