@@ -13,40 +13,48 @@ public class Client_simple {
 
     public static void main(String[] args) {
         try {
+            Scanner scanner = new Scanner(System.in);
             Socket clientSocket = new Socket("localhost", 1337);
+            System.out.println("*** Bienvenue au portail d'inscription de cours de l'UDEM *** \n" +
+                    "Veuillez choisir la session pour laquelle vous voulez consulter la liste des cours: \n" +
+                    "1. Automne \n2. Hiver\n3. Ete");
+            voirSession(clientSocket, scanner);
 
-            System.out.print("Veuillez entrer 1 pour consulter la liste des cours pour une session ou entrer 2 pour " +
-                    "vous inscrire à un cours. \n");
+            System.out.print("1. Consulter les cours offerts pour une autre session\n" +
+                    "2. Inscription à un cours \n");
 
-            Scanner scanner1 = new Scanner(System.in);
-            Integer choice = scanner1.nextInt();
-            if (choice == 1) {
-                voirSession(clientSocket);
-            } else if (choice == 2) {
-                inscrireCours(clientSocket);
-            } else {
-                System.out.println("Uhh okay");
+            System.out.print("> Choix: ");
+            boolean repeat = true;
+            while (repeat) {
+                clientSocket = new Socket("localhost", 1337);
+                int choice = scanner.nextInt();
+                if (choice == 1) {
+                    voirSession(clientSocket, scanner);
+                    repeat = false;
+                } else if (choice == 2) {
+                    inscrireCours(clientSocket, scanner);
+                    repeat = false;
+                } else {
+                    System.out.println("Veuillez entrer 1 ou 2.");
+                    repeat = true;
+                }
             }
-            scanner1.close();
+            scanner.close();
 
         } catch (UnknownHostException e){
             System.out.println("IP address cannot be determined");
         } catch (IOException | ClassNotFoundException i){
-
+            System.out.println("Code du cours non disponible à la session choisie.");
         }
     }
-
-    public static void voirSession(Socket clientSocket) throws IOException, ClassNotFoundException {
-        System.out.println("*** Bienvenue au portail d'inscription de cours de l'UDEM *** \n" +
-                            "Veuillez choisir la session pour laquelle vous voulez consulter la liste des cours: \n" +
-                            "1. Automne \n2. Hiver\n3. Ete");
+    public static ArrayList<Course> reponse;
+    public static void voirSession(Socket clientSocket, Scanner scanner) throws IOException, ClassNotFoundException {
 
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
 
         //Envoyer la commande
-        Scanner scanner = new Scanner(System.in);
+        System.out.print("> Choix: ");
         int choix = scanner.nextInt();
-        scanner.close();
 
         String session = "";
         switch(choix) {
@@ -68,7 +76,7 @@ public class Client_simple {
 
         //Afficher les cours de la session spécifiée
         ObjectInputStream objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
-        ArrayList<Course> reponse = (ArrayList<Course>) objectInputStream.readObject();
+        reponse = (ArrayList<Course>) objectInputStream.readObject();
 
         System.out.println("Les cours offerts pendant la session d'"+ session.toLowerCase() + " sont:");
         int nb = 0;
@@ -81,7 +89,7 @@ public class Client_simple {
         objectOutputStream.close();
     }
 
-    public static void inscrireCours(Socket clientSocket) throws IOException, ClassNotFoundException {
+    public static void inscrireCours(Socket clientSocket, Scanner scanner) throws IOException, ClassNotFoundException {
         //Envoi de la commande
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
         //*** À modifier, car répétition dans le code
@@ -90,20 +98,19 @@ public class Client_simple {
         System.out.println("Envoi de la requête: " + ligne);
 
         //Inscription -- Envoi du formulaire d'inscription
-        Scanner scanner2 = new Scanner(System.in);
+        String blank = scanner.nextLine(); //petit bug de scanner
         System.out.print("Veuillez saisir votre prénom: ");
-        String prenom = scanner2.nextLine();
+        String prenom = scanner.nextLine();
         System.out.print("Veuillez saisir votre nom: ");
-        String nom = scanner2.nextLine();
+        String nom = scanner.nextLine();
         System.out.print("Veuillez saisir votre email: ");
-        String email = scanner2.nextLine();
+        String email = scanner.nextLine();
         System.out.print("Veuillez saisir votre matricule: ");
-        String matricule = scanner2.nextLine();
+        String matricule = scanner.nextLine();
         System.out.print("Veuillez saisir le code du cours: ");
-        String code = scanner2.nextLine();
+        String code = scanner.nextLine();
 
-        //TODO probablement à modifier
-        FileReader fr = new FileReader("src/main/java/server/data/cours.txt");
+        /*FileReader fr = new FileReader("src/main/java/server/data/cours.txt");
         BufferedReader reader = new BufferedReader(fr);
 
         //Créer liste d'objets Course à partir du fichier cours.txt
@@ -114,15 +121,18 @@ public class Client_simple {
             //Créer nouvel objet Course à ajouter
             Course cours = new Course(parts[1], parts[0], parts[2]);
             listeClasses.add(cours);
-        }
+        }*/
 
         Course coursAInscrire = null;
         //Chercher pour Course correspondant au code donné par l'utilisateur
-        for (Course classe: listeClasses){
+        for (Course classe: reponse){
             if (classe.getCode().equals(code)){
                 coursAInscrire = classe;
                 break;
             }
+        }
+        if (coursAInscrire == null){
+            throw new ClassNotFoundException();
         }
 
         System.out.println(coursAInscrire.toString());
