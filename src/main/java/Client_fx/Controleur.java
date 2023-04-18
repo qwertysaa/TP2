@@ -80,16 +80,8 @@ public class Controleur {
         }
         return valeur;
     }
-    public String checkNumbers(String valeur){
-        Boolean allNumbers = isAllNumbers(valeur);
-        if (allNumbers) {
-            return valeur;
+    
 
-        }else{
-            messageOuErreur = "Erreur";
-            lesErreurs = lesErreurs + "Matricule ne doit contenir que des chiffres.\n";
-        }
-        return valeur;
     public String checkEmail(String valeur){
         Boolean bonEmail = valeur.endsWith("@umontreal.ca");
         if (bonEmail) {
