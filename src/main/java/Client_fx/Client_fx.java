@@ -24,8 +24,7 @@ public class Client_fx extends Application {
         stage.setTitle("Inscription UdeM");
         stage.setScene(scene);
         stage.show();
-
-        Erreur.display("Erreur","Image"); // Debogage
+        
 
     }
 }

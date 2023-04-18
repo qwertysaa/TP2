@@ -103,3 +103,19 @@ Hiver	IFT2125	x	x	x	slcm@umontreal.ca
 Hiver	IFT2125	x	x	x	slcm@umontreal.ca
 Hiver	IFT1025	d	w	w	@umontreal.ca
 Hiver	IFT1025	d	w	w	@umontreal.ca
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125	d	d	d	d
+Hiver	IFT2125	d	d	d	d
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125	d	d	d	d
+Hiver	IFT2125	d	d	d	d
+Hiver	IFT2125	1	d	d	d
+Hiver	IFT2125	1	d	d	d
+Hiver	IFT2125	a	d	d	d@umontreal.ca
+Hiver	IFT2125	a	d	d	d@umontreal.ca
+Hiver	IFT2125				
+Hiver	IFT2125				
+Hiver	IFT2125	a		a	
+Hiver	IFT2125	a		a	

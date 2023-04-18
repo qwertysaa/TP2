@@ -71,7 +71,6 @@ public class Modele {
             objectOutputStream.writeObject(ligne);
             System.out.println("Envoi de la requête: " + ligne);
 
-            // TODO probablement à modifier
             RegistrationForm formulaire = new RegistrationForm(prenom, nom, email, matricule, coursSelectionne);
             System.out.println("formulaire :"+ formulaire.toString());
             objectOutputStream.writeObject(formulaire);

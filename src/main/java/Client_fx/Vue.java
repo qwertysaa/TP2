@@ -155,7 +155,6 @@ public class Vue extends BorderPane {
         // sont rentrés correctement et ensuite update la fiche d'inscription et envoyer en message
         HBox envoyerHBox = new HBox();
         envoyerHBox.getChildren().add(envoyer);
-        //TODO ** //envoyer.setOnAction(e -> Erreur.display("Erreur","non"));
         rightVBox.getChildren().add(envoyerHBox);
 
 
